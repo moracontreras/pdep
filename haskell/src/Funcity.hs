@@ -38,10 +38,16 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 --Punto 2
 
 tieneAtraccionCopada :: Ciudad -> Bool
-tieneAtraccionCopada unaCiudad = any (isVowel.head).atracciones $unaCiudad
+tieneAtraccionCopada unaCiudad = any (isVowel.head).atracciones $ unaCiudad
 
 isVowel :: Char -> Bool
-isVowel character = character `elem` "aeiouAEIOU"  
+isVowel character = character `elem` "aeiouAEIOU" 
 
 esCiudadSobria :: Ciudad->Int->Bool
-esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $unaCiudad)
+esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ unaCiudad)
+
+--Punto 3
+reevaluacion :: Ciudad -> Int -> Ciudad
+reevaluacion unaCiudad cantidadDeLetras
+    |esCiudadSobria unaCiudad cantidadDeLetras = unaCiudad {costoDeVida = costoDeVida unaCiudad + costoDeVida unaCiudad `div` 10 }
+    |otherwise                                 = unaCiudad {costoDeVida = costoDeVida unaCiudad - 3}

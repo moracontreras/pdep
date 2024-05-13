@@ -19,7 +19,7 @@ caletaOlivia = UnaCiudad "Caleta Olivia" 1901 ["El Gorosito", "Faro Costanera"] 
 
 valorDeUnaCiudad :: Ciudad -> Float
 valorDeUnaCiudad unaCiudad
-    | fechaFundacion unaCiudad <= 1800 = (1800 - fechaFundacion unaCiudad) * 5
+    | fechaFundacion unaCiudad < 1800 = (1800 - fechaFundacion unaCiudad) * 5
     | null (atracciones unaCiudad)     = costoDeVida unaCiudad * 2
     | otherwise                        = costoDeVida unaCiudad * 3
 

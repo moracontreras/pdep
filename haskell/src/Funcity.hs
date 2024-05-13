@@ -49,5 +49,8 @@ esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ un
 --Punto 3
 reevaluacion :: Ciudad -> Int -> Ciudad
 reevaluacion unaCiudad cantidadDeLetras
-    |esCiudadSobria unaCiudad cantidadDeLetras = unaCiudad {costoDeVida = costoDeVida unaCiudad + costoDeVida unaCiudad `div` 10 }
-    |otherwise                                 = unaCiudad {costoDeVida = costoDeVida unaCiudad - 3}
+    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida unaCiudad (+ costoDeVida unaCiudad `div` 10)
+    |otherwise                                 = modificarCostoDeVida unaCiudad (subtract 3)
+
+modificarCostoDeVida :: Ciudad -> (Int -> Int) -> Ciudad
+modificarCostoDeVida unaCiudad unaFuncion = unaCiudad { costoDeVida = unaFuncion . costoDeVida $ unaCiudad}

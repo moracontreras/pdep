@@ -47,10 +47,29 @@ esCiudadSobria :: Ciudad->Int->Bool
 esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ unaCiudad)
 
 --Punto 3
+porcentaje :: Int -> Int -> Int
+porcentaje unValor unPorcentaje = div (unValor * unPorcentaje) 100
+
+crisis :: Ciudad -> Ciudad
+crisis unaCiudad 
+  | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentaje (costoDeVida unaCiudad) 10)) unaCiudad
+  | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentaje (costoDeVida unaCiudad) 10)) $ unaCiudad
+
+quitarAtraccion:: Ciudad -> Ciudad
+quitarAtraccion unaCiudad = unaCiudad {
+  atracciones = tail (atracciones unaCiudad)
+}
+
+remodelacion :: Int -> Ciudad -> Ciudad
+remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New" ++ ) $ unaCiudad
+
+cambiarNombre :: (String -> String) -> Ciudad-> Ciudad
+cambiarNombre fn unaCiudad = unaCiudad { nombre = fn.nombre $ unaCiudad }
+
 reevaluacion :: Ciudad -> Int -> Ciudad
 reevaluacion unaCiudad cantidadDeLetras
-    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida unaCiudad (+ costoDeVida unaCiudad `div` 10)
-    |otherwise                                 = modificarCostoDeVida unaCiudad (subtract 3)
+    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ costoDeVida unaCiudad `div` 10) unaCiudad 
+    |otherwise                                 = modificarCostoDeVida (subtract 3) unaCiudad
 
-modificarCostoDeVida :: Ciudad -> (Int -> Int) -> Ciudad
-modificarCostoDeVida unaCiudad unaFuncion = unaCiudad { costoDeVida = unaFuncion . costoDeVida $ unaCiudad}
+modificarCostoDeVida :: (Int -> Int) -> Ciudad -> Ciudad
+modificarCostoDeVida unaFuncion unaCiudad = unaCiudad { costoDeVida = unaFuncion . costoDeVida $ unaCiudad}

@@ -26,15 +26,6 @@ valorDeUnaCiudad unaCiudad
     | otherwise                        = costoDeVida unaCiudad * 3
 
 
-tieneNombreRaro :: Ciudad -> Bool
-tieneNombreRaro = (<5) . length . nombre
-
-maipu :: Ciudad
-maipu = UnaCiudad "Maipu" 1878 ["Fortin Kakel"] 115
-
-azul :: Ciudad
-azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "Costanera Cacique Catriel"] 190
-
 --Punto 2
 
 tieneAtraccionCopada :: Ciudad -> Bool
@@ -46,9 +37,17 @@ isVowel character = character `elem` "aeiouAEIOU"
 esCiudadSobria :: Ciudad->Int->Bool
 esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ unaCiudad)
 
+tieneNombreRaro :: Ciudad -> Bool
+tieneNombreRaro = (<5) . length . nombre
+
+maipu :: Ciudad
+maipu = UnaCiudad "Maipu" 1878 ["Fortin Kakel"] 115
+
+azul :: Ciudad
+azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "Costanera Cacique Catriel"] 190
+
+
 --Punto 3
-porcentaje :: Int -> Int -> Int
-porcentaje unValor unPorcentaje = div (unValor * unPorcentaje) 100
 
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
 sumarNuevaAtraccion unaAtraccion unaCiudad =
@@ -62,16 +61,8 @@ crisis unaCiudad
   | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentaje (costoDeVida unaCiudad) 10)) unaCiudad
   | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentaje (costoDeVida unaCiudad) 10)) $ unaCiudad
 
-quitarAtraccion:: Ciudad -> Ciudad
-quitarAtraccion unaCiudad = unaCiudad {
-  atracciones = tail (atracciones unaCiudad)
-}
-
 remodelacion :: Int -> Ciudad -> Ciudad
 remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New" ++ ) $ unaCiudad
-
-cambiarNombre :: (String -> String) -> Ciudad-> Ciudad
-cambiarNombre fn unaCiudad = unaCiudad { nombre = fn.nombre $ unaCiudad }
 
 reevaluacion :: Ciudad -> Int -> Ciudad
 reevaluacion unaCiudad cantidadDeLetras
@@ -80,3 +71,31 @@ reevaluacion unaCiudad cantidadDeLetras
 
 modificarCostoDeVida :: (Int -> Int) -> Ciudad -> Ciudad
 modificarCostoDeVida unaFuncion unaCiudad = unaCiudad { costoDeVida = unaFuncion . costoDeVida $ unaCiudad}
+
+porcentaje :: Int -> Int -> Int
+porcentaje unValor unPorcentaje = div (unValor * unPorcentaje) 100
+
+cambiarNombre :: (String -> String) -> Ciudad-> Ciudad
+cambiarNombre fn unaCiudad = unaCiudad { nombre = fn.nombre $ unaCiudad }
+
+quitarAtraccion:: Ciudad -> Ciudad
+quitarAtraccion unaCiudad = unaCiudad {
+  atracciones = tail (atracciones unaCiudad)
+}
+
+
+--punto 4
+{-
+ghci> sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown" azul
+UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Balneario Municipal Alte, Guillermo Brown","Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 228}
+ghci> crisis azul
+UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 171}
+ghci> crisis nullish
+UnaCiudad {nombre = "Nullish", fechaFundacion = 1800, atracciones = [], costoDeVida = 126}
+ghci> remodelacion 50 azul
+UnaCiudad {nombre = "NewAzul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 285}
+ghci> reevaluacion azul 14
+UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 187}
+ghci> reevaluacion azul 13
+UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 209}
+-}

@@ -50,6 +50,13 @@ esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ un
 porcentaje :: Int -> Int -> Int
 porcentaje unValor unPorcentaje = div (unValor * unPorcentaje) 100
 
+sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
+sumarNuevaAtraccion unaAtraccion unaCiudad =
+  unaCiudad{
+    atracciones = (unaAtraccion:atracciones unaCiudad),
+    costoDeVida = costoDeVida unaCiudad + porcentaje (costoDeVida unaCiudad) 20
+  }
+
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
   | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentaje (costoDeVida unaCiudad) 10)) unaCiudad

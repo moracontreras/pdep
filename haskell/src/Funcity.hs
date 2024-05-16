@@ -66,7 +66,7 @@ remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costo
 
 reevaluacion :: Ciudad -> Int -> Ciudad
 reevaluacion unaCiudad cantidadDeLetras
-    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ costoDeVida unaCiudad `div` 10) unaCiudad 
+    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ porcentaje (costoDeVida unaCiudad) 10) unaCiudad 
     |otherwise                                 = modificarCostoDeVida (subtract 3) unaCiudad
 
 modificarCostoDeVida :: (Int -> Int) -> Ciudad -> Ciudad

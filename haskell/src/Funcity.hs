@@ -50,11 +50,8 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 --Punto 3
 
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
-sumarNuevaAtraccion unaAtraccion unaCiudad =
-  unaCiudad{
-    atracciones = (unaAtraccion:atracciones unaCiudad),
-    costoDeVida = costoDeVida unaCiudad + porcentaje (costoDeVida unaCiudad) 20
-  }
+sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentaje (costoDeVida unaCiudad) 20)) $ unaCiudad
+
 
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
@@ -77,6 +74,9 @@ porcentaje unValor unPorcentaje = div (unValor * unPorcentaje) 100
 
 cambiarNombre :: (String -> String) -> Ciudad-> Ciudad
 cambiarNombre fn unaCiudad = unaCiudad { nombre = fn.nombre $ unaCiudad }
+
+agregarAtraccion :: String -> Ciudad -> Ciudad
+agregarAtraccion unaAtraccion unaCiudad = unaCiudad{atracciones = (unaAtraccion:atracciones unaCiudad)}
 
 quitarAtraccion:: Ciudad -> Ciudad
 quitarAtraccion unaCiudad = unaCiudad {

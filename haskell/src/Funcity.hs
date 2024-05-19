@@ -35,7 +35,7 @@ isVowel :: Char -> Bool
 isVowel character = character `elem` "aeiouAEIOU" 
 
 esCiudadSobria :: Ciudad->Int->Bool
-esCiudadSobria unaCiudad unNumero = all (>unNumero) (map length.atracciones $ unaCiudad)
+esCiudadSobria unaCiudad unNumero = all ((>unNumero).length) (atracciones unaCiudad)
 
 tieneNombreRaro :: Ciudad -> Bool
 tieneNombreRaro = (<5) . length . nombre

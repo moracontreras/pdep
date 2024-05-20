@@ -21,13 +21,15 @@ caletaOlivia = UnaCiudad "Caleta Olivia" 1901 ["El Gorosito", "Faro Costanera"] 
 
 valorDeUnaCiudad :: Ciudad -> Int
 valorDeUnaCiudad unaCiudad
-    | fechaFundacion unaCiudad < 1800 = (1800 - fechaFundacion unaCiudad) * 5
-    | null (atracciones unaCiudad)     = costoDeVida unaCiudad * 2
-    | otherwise                        = costoDeVida unaCiudad * 3
+    | esAntigua unaCiudad          = (1800 - fechaFundacion unaCiudad) * 5 
+    | noTieneAtracciones unaCiudad = (* 2) . costoDeVida $ unaCiudad 
+    | otherwise                    = (* 3) . costoDeVida $ unaCiudad 
 
--- esAntigua 
--- notieneAtracciones
--- agregar composicion
+esAntigua :: Ciudad -> Bool
+esAntigua unaCiudad = (<1800).fechaFundacion $ unaCiudad 
+
+noTieneAtracciones :: Ciudad -> Bool
+noTieneAtracciones unaCiudad = null (atracciones unaCiudad)
 
 --Punto 2
 

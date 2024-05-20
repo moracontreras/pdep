@@ -25,6 +25,9 @@ valorDeUnaCiudad unaCiudad
     | null (atracciones unaCiudad)     = costoDeVida unaCiudad * 2
     | otherwise                        = costoDeVida unaCiudad * 3
 
+-- esAntigua 
+-- notieneAtracciones
+-- agregar composicion
 
 --Punto 2
 
@@ -52,6 +55,7 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
 sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentaje (costoDeVida unaCiudad) 20)) $ unaCiudad
 
+-- funcion q le haga el pocentaje al costo de vida
 
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
@@ -82,7 +86,7 @@ quitarAtraccion:: Ciudad -> Ciudad
 quitarAtraccion unaCiudad = unaCiudad {
   atracciones = tail (atracciones unaCiudad)
 }
-
+-- modificar atracciones
 
 --punto 4
 {-
@@ -102,4 +106,7 @@ ghci> reevaluacion azul 14
 UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 187}
 ghci> reevaluacion azul 13
 UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 209}
+
+sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelacion 50.reevaluacion 14 $ azul
+
 -}

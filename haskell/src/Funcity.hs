@@ -92,23 +92,5 @@ quitarAtraccion unaCiudad = unaCiudad {
 
 --punto 4
 {-
-* Agregado de una nueva atraccion
-ghci> sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown" azul
-UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Balneario Municipal Alte, Guillermo Brown","Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 228}
-* Una crisis
-ghci> crisis azul
-UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 171}
-ghci> crisis nullish
-UnaCiudad {nombre = "Nullish", fechaFundacion = 1800, atracciones = [], costoDeVida = 126}
-*una remodelacion
-ghci> remodelacion 50 azul
-UnaCiudad {nombre = "NewAzul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 285}
-*una reevaluacion
-ghci> reevaluacion azul 14
-UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 187}
-ghci> reevaluacion azul 13
-UnaCiudad {nombre = "Azul", fechaFundacion = 1832, atracciones = ["Teatro Espa\241ol","Parque Municipal Sarmiento","Costanera Cacique Catriel"], costoDeVida = 209}
-
 sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelacion 50.reevaluacion 14 $ azul
-
 -}

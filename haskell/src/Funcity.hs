@@ -94,3 +94,19 @@ quitarAtraccion unaCiudad = unaCiudad {
 {-
 sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelacion 50.reevaluacion 14 $ azul
 -}
+
+-- ***************** SEGUNDA ENTREGA ****************
+
+--punto 1
+
+data Año = UnAño {
+  numero :: Int,
+  evento :: [String]
+} deriving Show
+
+
+
+--punto 2
+
+
+--punto 3

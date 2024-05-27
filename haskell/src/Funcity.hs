@@ -82,14 +82,15 @@ cambiarNombre :: (String -> String) -> Ciudad-> Ciudad
 cambiarNombre fn unaCiudad = unaCiudad { nombre = fn.nombre $ unaCiudad }
 
 agregarAtraccion :: String -> Ciudad -> Ciudad
-agregarAtraccion unaAtraccion unaCiudad = unaCiudad{atracciones = (unaAtraccion:atracciones unaCiudad)}
+agregarAtraccion unaAtraccion unaCiudad = modificarAtracciones (unaAtraccion:) unaCiudad
 
 quitarAtraccion:: Ciudad -> Ciudad
-quitarAtraccion unaCiudad = unaCiudad {
-  atracciones = tail (atracciones unaCiudad)
-}
--- modificar atracciones
+quitarAtraccion unaCiudad = modificarAtracciones tail unaCiudad
 
+modificarAtracciones :: ([String] -> [String]) -> Ciudad -> Ciudad
+modificarAtracciones fn unaCiudad = unaCiudad {
+  atracciones = fn (atracciones unaCiudad)
+}
 --punto 4
 {-
 sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelacion 50.reevaluacion 14 $ azul

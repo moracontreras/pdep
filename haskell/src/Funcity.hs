@@ -121,3 +121,12 @@ losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ci
 
 
 --punto 3
+
+discoRayado :: [String]
+discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
+
+{- No hay un resultado posible, ya que la función debería
+aplicar el evento a todas las ciudades de la lista para luego
+ evaluar su orden. Utiliza la estrategia basada en la
+  evaluacion ansiosa, pero al ser una lista infinita, 
+  esta nunca se termina, por lo que no es posible aplicar la función.-}

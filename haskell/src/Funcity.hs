@@ -105,9 +105,14 @@ data Año = UnAño {
   evento :: [String]
 } deriving Show
 
-
+{-Para un año, queremos aplicar solo los eventos que hagan que el valor suba. 
+Debe quedar como resultado la ciudad afectada con dichos eventos.-}
 
 --punto 2
+{-Dado un año y una ciudad, queremos saber si los eventos están ordenados en forma correcta, 
+esto implica que el costo de vida al aplicar cada evento se va incrementando respecto al anterior evento. 
+Debe haber al menos un evento para dicho año.
+-}
 
 
 --punto 3

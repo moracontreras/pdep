@@ -67,8 +67,8 @@ crisis unaCiudad
 remodelacion :: Int -> Ciudad -> Ciudad
 remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
 
-reevaluacion :: Ciudad -> Int -> Ciudad
-reevaluacion unaCiudad cantidadDeLetras
+reevaluacion :: Int -> Ciudad -> Ciudad
+reevaluacion cantidadDeLetras unaCiudad
     |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ porcentaje (costoDeVida unaCiudad) 10) unaCiudad 
     |otherwise                                 = modificarCostoDeVida (subtract 3) unaCiudad
 
@@ -102,9 +102,19 @@ sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelac
 
 data Año = UnAño {
   numero :: Int,
-  evento :: [String]
+  evento :: [Evento]
 } deriving Show
 
+type Evento = Ciudad -> Ciudad
+
+año2022 :: Año
+año2022 = UnAño 2022 [crisis, remodelacion 5, reevaluacion 7]
+
+año2015 :: Año
+año2015 = UnAño 2015 []
+
+losAñosPasan :: Año -> Ciudad -> Ciudad
+losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
 
 
 --punto 2

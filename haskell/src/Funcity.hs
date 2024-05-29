@@ -67,8 +67,8 @@ crisis unaCiudad
 remodelacion :: Int -> Ciudad -> Ciudad
 remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
 
-reevaluacion :: Ciudad -> Int -> Ciudad
-reevaluacion unaCiudad cantidadDeLetras
+reevaluacion :: Int -> Ciudad -> Ciudad
+reevaluacion cantidadDeLetras unaCiudad
     |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ porcentaje (costoDeVida unaCiudad) 10) unaCiudad 
     |otherwise                                 = modificarCostoDeVida (subtract 3) unaCiudad
 
@@ -102,17 +102,22 @@ sumarNuevaAtraccion "Balneario Municipal Alte, Guillermo Brown".crisis.remodelac
 
 data Año = UnAño {
   numero :: Int,
-  evento :: [String]
+  evento :: [Evento]
 } deriving Show
 
-{-Para un año, queremos aplicar solo los eventos que hagan que el valor suba. 
-Debe quedar como resultado la ciudad afectada con dichos eventos.-}
+type Evento = Ciudad -> Ciudad
+
+año2022 :: Año
+año2022 = UnAño 2022 [crisis, remodelacion 5, reevaluacion 7]
+
+año2015 :: Año
+año2015 = UnAño 2015 []
+
+losAñosPasan :: Año -> Ciudad -> Ciudad
+losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
+
 
 --punto 2
-{-Dado un año y una ciudad, queremos saber si los eventos están ordenados en forma correcta, 
-esto implica que el costo de vida al aplicar cada evento se va incrementando respecto al anterior evento. 
-Debe haber al menos un evento para dicho año.
--}
 
 
 --punto 3
@@ -120,4 +125,8 @@ Debe haber al menos un evento para dicho año.
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
 
--- No hay un resultado posible, ya que la función debería aplicar el evento a todas las ciudades de la lista para luego evaluar su orden. Utiliza la estrategia basada en la evaluacion ansiosa, pero al ser una lista infinita, esta nunca se termina, por lo que no es posible aplicar la función.
+{- No hay un resultado posible, ya que la función debería
+aplicar el evento a todas las ciudades de la lista para luego
+ evaluar su orden. Utiliza la estrategia basada en la
+  evaluacion ansiosa, pero al ser una lista infinita, 
+  esta nunca se termina, por lo que no es posible aplicar la función.-}

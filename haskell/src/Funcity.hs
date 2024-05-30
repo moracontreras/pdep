@@ -122,6 +122,12 @@ costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSub
 eventosQueSubenElCostoDeVida :: Año -> Ciudad -> [Evento]
 eventosQueSubenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> compararCostoDeVida eventos unaCiudad) evento
 
+costoDeVidaQueBaje :: Año -> Ciudad -> Ciudad
+costoDeVidaQueBaje unAño unaCiudad = losAñosPasan (modificarAño eventosQueBajenElCostoDeVida unaCiudad unAño) unaCiudad
+
+eventosQueBajenElCostoDeVida :: Año -> Ciudad -> [Evento]
+eventosQueBajenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> not (compararCostoDeVida eventos unaCiudad)) evento
+
 compararCostoDeVida :: Evento -> Ciudad -> Bool
 compararCostoDeVida unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad
 

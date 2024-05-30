@@ -116,6 +116,17 @@ año2015 = UnAño 2015 []
 losAñosPasan :: Año -> Ciudad -> Ciudad
 losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
 
+costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
+costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSubenElCostoDeVida unaCiudad unAño) unaCiudad
+
+eventosQueSubenElCostoDeVida :: Año -> Ciudad -> [Evento]
+eventosQueSubenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> compararCostoDeVida eventos unaCiudad) evento
+
+compararCostoDeVida :: Evento -> Ciudad -> Bool
+compararCostoDeVida unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad
+
+modificarAño :: (Año -> Ciudad -> [Evento]) -> Ciudad -> Año -> Año
+modificarAño unaFuncion unaCiudad unAño = unAño { evento = unaFuncion unAño unaCiudad}
 
 --punto 2
 

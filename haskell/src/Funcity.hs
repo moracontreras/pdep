@@ -139,6 +139,15 @@ modificarAño unaFuncion unaCiudad unAño = unAño { evento = unaFuncion unAño 
 
 --punto 3
 
+año2024 :: Año
+año2024 = UnAño {
+  numero = 2024,
+  evento = crisis : reevaluacion 7 : listaRemodelaciones
+}
+
+listaRemodelaciones :: [Evento]
+listaRemodelaciones = map remodelacion [1..]
+
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
 

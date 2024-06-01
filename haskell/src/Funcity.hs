@@ -55,7 +55,7 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 --Punto 3
 
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
-sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentaje (costoDeVida unaCiudad) 20)) $ unaCiudad
+sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentajeCostoDeVida unaCiudad 20)) $ unaCiudad
 
 -- funcion q le haga el pocentaje al costo de vida
 
@@ -65,10 +65,10 @@ porcentajeCostoDeVida unaCiudad unNumero = porcentaje (costoDeVida unaCiudad) un
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
   | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentajeCostoDeVida unaCiudad 10)) unaCiudad
-  | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentaje (costoDeVida unaCiudad) 10)) $ unaCiudad
+  | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentajeCostoDeVida unaCiudad 10)) $ unaCiudad
 
 remodelacion :: Int -> Ciudad -> Ciudad
-remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentajeCostoDeVida unaCiudad unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
+remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
 
 reevaluacion :: Int -> Ciudad -> Ciudad
 reevaluacion cantidadDeLetras unaCiudad
@@ -119,6 +119,9 @@ año2015 = UnAño 2015 []
 losAñosPasan :: Año -> Ciudad -> Ciudad
 losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
 
+algoMejor :: Ciudad->(Ciudad->Int)->Evento->Bool
+algoMejor unaCiudad unCriterio unEvento = (unCriterio.unEvento $unaCiudad) > (unCriterio unaCiudad)
+
 costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
 costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSubenElCostoDeVida unaCiudad unAño) unaCiudad
 
@@ -148,6 +151,11 @@ eventosOrdenados :: Ciudad->Año->Bool
 eventosOrdenados unaCiudad (UnAño _ []) = False
 eventosOrdenados unaCiudad (UnAño _ (x:[])) = True
 eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $unaCiudad) < (costoDeVida.xs.x $unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
+
+ciudadesOrdenadas :: [Ciudad]->Evento->Bool
+ciudadesOrdenadas [] _ = False
+ciudadesOrdenadas (x:[]) _ = True
+ciudadesOrdenadas (x:xs:xxs) unEvento = (costoDeVida.unEvento $x) < (costoDeVida.unEvento $xs) && ciudadesOrdenadas (xs:xxs) unEvento
 
 --punto 3
 

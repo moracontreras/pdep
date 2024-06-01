@@ -1,6 +1,7 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Eta reduce" #-}
 import Text.Show.Functions ()
+import Foreign (toBool)
 
 --Punto 1 
 data Ciudad = UnaCiudad {
@@ -145,7 +146,7 @@ subirValor unaCiudad (UnAño _ eventos) unValor = foldr (\evento ciudad-> evento
 
 --punto 2
 año2023 :: Año
-año2023 = UnAño 2023 [crisis, agregarAtraccion "parque", remodelacion 10, remodelacion 20]
+año2023 = UnAño 2023 [crisis, sumarNuevaAtraccion "parque", remodelacion 10, remodelacion 20]
 
 eventosOrdenados :: Ciudad->Año->Bool
 eventosOrdenados unaCiudad (UnAño _ []) = False
@@ -157,6 +158,13 @@ ciudadesOrdenadas [] _ = False
 ciudadesOrdenadas (x:[]) _ = True
 ciudadesOrdenadas (x:xs:xxs) unEvento = (costoDeVida.unEvento $x) < (costoDeVida.unEvento $xs) && ciudadesOrdenadas (xs:xxs) unEvento
 
+añosOrdenados :: Ciudad->[Año]->Bool
+añosOrdenados unaCiudad [] = False
+añosOrdenados unaCiudad (x:[]) = True
+añosOrdenados unaCiudad (x:xs:xxs) = (costoDeVida.(losAñosPasan x) $unaCiudad) < (costoDeVida.(losAñosPasan xs) $unaCiudad) && añosOrdenados unaCiudad (xs:xxs) 
+
+año2021 :: Año
+año2021 = UnAño 2021 [crisis, sumarNuevaAtraccion "playa"]
 --punto 3
 
 año2024 :: Año

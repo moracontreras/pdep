@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Eta reduce" #-}
 import Text.Show.Functions ()
-import Foreign (toBool)
+
 
 --Punto 1 
 data Ciudad = UnaCiudad {

@@ -59,17 +59,20 @@ sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . mod
 
 -- funcion q le haga el pocentaje al costo de vida
 
+porcentajeCostoDeVida :: Ciudad->Int->Int
+porcentajeCostoDeVida unaCiudad unNumero = porcentaje (costoDeVida unaCiudad) unNumero
+
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
-  | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentaje (costoDeVida unaCiudad) 10)) unaCiudad
+  | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentajeCostoDeVida unaCiudad 10)) unaCiudad
   | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentaje (costoDeVida unaCiudad) 10)) $ unaCiudad
 
 remodelacion :: Int -> Ciudad -> Ciudad
-remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentaje (costoDeVida unaCiudad) unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
+remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentajeCostoDeVida unaCiudad unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad
 
 reevaluacion :: Int -> Ciudad -> Ciudad
 reevaluacion cantidadDeLetras unaCiudad
-    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ porcentaje (costoDeVida unaCiudad) 10) unaCiudad 
+    |esCiudadSobria unaCiudad cantidadDeLetras = modificarCostoDeVida (+ (porcentajeCostoDeVida unaCiudad 10)) unaCiudad 
     |otherwise                                 = modificarCostoDeVida (subtract 3) unaCiudad
 
 modificarCostoDeVida :: (Int -> Int) -> Ciudad -> Ciudad
@@ -116,17 +119,57 @@ año2015 = UnAño 2015 []
 losAñosPasan :: Año -> Ciudad -> Ciudad
 losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
 
+costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
+costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSubenElCostoDeVida unaCiudad unAño) unaCiudad
+
+eventosQueSubenElCostoDeVida :: Año -> Ciudad -> [Evento]
+eventosQueSubenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> compararCostoDeVida eventos unaCiudad) evento
+
+costoDeVidaQueBaje :: Año -> Ciudad -> Ciudad
+costoDeVidaQueBaje unAño unaCiudad = losAñosPasan (modificarAño eventosQueBajenElCostoDeVida unaCiudad unAño) unaCiudad
+
+eventosQueBajenElCostoDeVida :: Año -> Ciudad -> [Evento]
+eventosQueBajenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> not (compararCostoDeVida eventos unaCiudad)) evento
+
+compararCostoDeVida :: Evento -> Ciudad -> Bool
+compararCostoDeVida unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad
+
+modificarAño :: (Año -> Ciudad -> [Evento]) -> Ciudad -> Año -> Año
+modificarAño unaFuncion unaCiudad unAño = unAño { evento = unaFuncion unAño unaCiudad}
+
+subirValor :: Ciudad ->Año ->(Ciudad ->Int)->Ciudad
+subirValor unaCiudad (UnAño _ eventos) unValor = foldr (\evento ciudad-> evento ciudad) unaCiudad (filter (algoMejor unaCiudad unValor) $eventos)
 
 --punto 2
+año2023 :: Año
+año2023 = UnAño 2023 [crisis, agregarAtraccion "parque", remodelacion 10, remodelacion 20]
 
+eventosOrdenados :: Ciudad->Año->Bool
+eventosOrdenados unaCiudad (UnAño _ []) = False
+eventosOrdenados unaCiudad (UnAño _ (x:[])) = True
+eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $unaCiudad) < (costoDeVida.xs.x $unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
 
 --punto 3
+
+año2024 :: Año
+año2024 = UnAño {
+  numero = 2024,
+  evento = crisis : reevaluacion 7 : listaRemodelaciones
+}
+
+listaRemodelaciones :: [Evento]
+listaRemodelaciones = map remodelacion [1..]
 
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
 
 {- No hay un resultado posible, ya que la función debería
 aplicar el evento a todas las ciudades de la lista para luego
- evaluar su orden. Utiliza la estrategia basada en la
-  evaluacion ansiosa, pero al ser una lista infinita, 
-  esta nunca se termina, por lo que no es posible aplicar la función.-}
+evaluar su orden. Utiliza la estrategia basada en la
+evaluacion ansiosa, pero al ser una lista infinita, 
+esta nunca se termina, por lo que no es posible aplicar la función.-}
+
+laHistoriaSinFin :: [Int] 
+laHistoriaSinFin = [2021, 2022] ++ repeat 2023
+
+{--}

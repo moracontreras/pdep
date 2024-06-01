@@ -55,7 +55,7 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 --Punto 3
 
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
-sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentaje (costoDeVida unaCiudad) 20)) $ unaCiudad
+sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentajeCostoDeVida unaCiudad 20)) $ unaCiudad
 
 -- funcion q le haga el pocentaje al costo de vida
 
@@ -65,7 +65,7 @@ porcentajeCostoDeVida unaCiudad unNumero = porcentaje (costoDeVida unaCiudad) un
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
   | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentajeCostoDeVida unaCiudad 10)) unaCiudad
-  | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentaje (costoDeVida unaCiudad) 10)) $ unaCiudad
+  | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentajeCostoDeVida unaCiudad 10)) $ unaCiudad
 
 remodelacion :: Int -> Ciudad -> Ciudad
 remodelacion unPorcentaje unaCiudad = modificarCostoDeVida (+ (porcentajeCostoDeVida unaCiudad unPorcentaje)) . cambiarNombre ("New " ++ ) $ unaCiudad

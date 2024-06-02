@@ -149,7 +149,7 @@ año2023 = UnAño 2023 [crisis, sumarNuevaAtraccion "parque", remodelacion 10, r
 eventosOrdenados :: Ciudad->Año->Bool
 eventosOrdenados unaCiudad (UnAño _ []) = False
 eventosOrdenados unaCiudad (UnAño _ (x:[])) = True
-eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $ unaCiudad) < (costoDeVida.xs.x $ unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
+eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $ unaCiudad) < (costoDeVida.xs $ unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
 
 ciudadesOrdenadas :: [Ciudad]->Evento->Bool
 ciudadesOrdenadas [] _ = False

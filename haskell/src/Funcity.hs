@@ -58,8 +58,6 @@ azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "
 sumarNuevaAtraccion :: String -> Ciudad -> Ciudad
 sumarNuevaAtraccion unaAtraccion unaCiudad = agregarAtraccion unaAtraccion . modificarCostoDeVida (+(porcentajeCostoDeVida unaCiudad 20)) $ unaCiudad
 
--- funcion q le haga el pocentaje al costo de vida
-
 porcentajeCostoDeVida :: Ciudad->Int->Int
 porcentajeCostoDeVida unaCiudad unNumero = porcentaje (costoDeVida unaCiudad) unNumero
 
@@ -176,11 +174,12 @@ año2024 = UnAño {
 listaRemodelaciones :: [Evento]
 listaRemodelaciones = map remodelacion [1..]
 
-{- No es posible evaluar el año 2024 en la funcion eventosOrdenados. Para 
-que eso suceda deberia recorrer copleta la lista de numeros (ya sea utilizando 
-lazy o eager evaluation) que toma remodelacion y al ser una lista infinita no 
-termina o se interrumpe por un Stack Overflow. En este caso se utiliza call-by-value 
-evaluando los parametros (en este caso infinitos) para despues pasarselo a la funcion. -}
+{- No es posible evaluar el año 2024 en la función eventosOrdenados. 
+Para que eso suceda, debería recorrer completa la lista de números 
+(ya sea utilizando lazy o eager evaluation) que toma remodelación y al
+ser una lista infinita, no termina o se interrumpe por un Stack Overflow. 
+En este caso, se utiliza call-by-value evaluando los parámetros (en este
+caso infinitos) para después pasárselo a la función -}
 
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]

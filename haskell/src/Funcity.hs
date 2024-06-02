@@ -121,7 +121,7 @@ losAñosPasan :: Año -> Ciudad -> Ciudad
 losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ciudad) unaCiudad evento
 
 algoMejor :: Ciudad->(Ciudad->Int)->Evento->Bool
-algoMejor unaCiudad unCriterio unEvento = (unCriterio.unEvento $unaCiudad) > (unCriterio unaCiudad)
+algoMejor unaCiudad unCriterio unEvento = (unCriterio.unEvento $ unaCiudad) > (unCriterio unaCiudad)
 
 costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
 costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSubenElCostoDeVida unaCiudad unAño) unaCiudad
@@ -142,7 +142,7 @@ modificarAño :: (Año -> Ciudad -> [Evento]) -> Ciudad -> Año -> Año
 modificarAño unaFuncion unaCiudad unAño = unAño { evento = unaFuncion unAño unaCiudad}
 
 subirValor :: Ciudad ->Año ->(Ciudad ->Int)->Ciudad
-subirValor unaCiudad (UnAño _ eventos) unValor = foldr (\evento ciudad-> evento ciudad) unaCiudad (filter (algoMejor unaCiudad unValor) $eventos)
+subirValor unaCiudad (UnAño _ eventos) unValor = foldr (\evento ciudad-> evento ciudad) unaCiudad (filter (algoMejor unaCiudad unValor) $ eventos)
 
 --punto 2
 año2023 :: Año
@@ -151,17 +151,17 @@ año2023 = UnAño 2023 [crisis, sumarNuevaAtraccion "parque", remodelacion 10, r
 eventosOrdenados :: Ciudad->Año->Bool
 eventosOrdenados unaCiudad (UnAño _ []) = False
 eventosOrdenados unaCiudad (UnAño _ (x:[])) = True
-eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $unaCiudad) < (costoDeVida.xs.x $unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
+eventosOrdenados unaCiudad (UnAño numero (x:xs:xxs)) = (costoDeVida.x $ unaCiudad) < (costoDeVida.xs.x $ unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (xs:xxs))
 
 ciudadesOrdenadas :: [Ciudad]->Evento->Bool
 ciudadesOrdenadas [] _ = False
 ciudadesOrdenadas (x:[]) _ = True
-ciudadesOrdenadas (x:xs:xxs) unEvento = (costoDeVida.unEvento $x) < (costoDeVida.unEvento $xs) && ciudadesOrdenadas (xs:xxs) unEvento
+ciudadesOrdenadas (x:xs:xxs) unEvento = (costoDeVida.unEvento $ x) < (costoDeVida.unEvento $ xs) && ciudadesOrdenadas (xs:xxs) unEvento
 
 añosOrdenados :: Ciudad->[Año]->Bool
 añosOrdenados unaCiudad [] = False
 añosOrdenados unaCiudad (x:[]) = True
-añosOrdenados unaCiudad (x:xs:xxs) = (costoDeVida.(losAñosPasan x) $unaCiudad) < (costoDeVida.(losAñosPasan xs) $unaCiudad) && añosOrdenados unaCiudad (xs:xxs) 
+añosOrdenados unaCiudad (x:xs:xxs) = (costoDeVida.(losAñosPasan x) $ unaCiudad) < (costoDeVida.(losAñosPasan xs) $ unaCiudad) && añosOrdenados unaCiudad (xs:xxs) 
 
 año2021 :: Año
 año2021 = UnAño 2021 [crisis, sumarNuevaAtraccion "playa"]
@@ -176,6 +176,12 @@ año2024 = UnAño {
 listaRemodelaciones :: [Evento]
 listaRemodelaciones = map remodelacion [1..]
 
+{- No es posible evaluar el año 2024 en la funcion eventosOrdenados. Para 
+que eso suceda deberia recorrer copleta la lista de numeros (ya sea utilizando 
+lazy o eager evaluation) que toma remodelacion y al ser una lista infinita no 
+termina o se interrumpe por un Stack Overflow. En este caso se utiliza call-by-value 
+evaluando los parametros (en este caso infinitos) para despues pasarselo a la funcion. -}
+
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
 
@@ -188,4 +194,4 @@ esta nunca se termina, por lo que no es posible aplicar la función.-}
 laHistoriaSinFin :: [Int] 
 laHistoriaSinFin = [2021, 2022] ++ repeat 2023
 
-{--}
+{- -}

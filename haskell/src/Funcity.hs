@@ -184,8 +184,8 @@ caso infinitos) para después pasárselo a la función -}
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
 
-{- No hay un resultado posible, ya que la función debería
-aplicar el evento a todas las ciudades de la lista para luego
+{- No hay un resultado posible al evaluar la lista discoRayado con la función ciudadesOrdenadas,
+ya que la función debería aplicar el evento a todas las ciudades de la lista para luego
 evaluar su orden. Utiliza la estrategia basada en la
 evaluacion ansiosa, pero al ser una lista infinita, 
 esta nunca se termina, por lo que no es posible aplicar la función.-}
@@ -193,4 +193,7 @@ esta nunca se termina, por lo que no es posible aplicar la función.-}
 laHistoriaSinFin :: [Int] 
 laHistoriaSinFin = [2021, 2022] ++ repeat 2023
 
-{- -}
+{- No se puede obtener un resultado al aplicar la función 
+añosOrdenados a la lista laHistoriaSinFin. Se debería recorrer
+la lista completa para luego poder evaluar las condiciones
+de la función, utilizando eager evaluation, pero al ser una lista infinita, no es posible realizarlo.-}

@@ -63,7 +63,7 @@ porcentajeCostoDeVida unaCiudad unNumero = porcentaje (costoDeVida unaCiudad) un
 
 crisis :: Ciudad -> Ciudad
 crisis unaCiudad 
-  | null (atracciones unaCiudad)     = modificarCostoDeVida (subtract (porcentajeCostoDeVida unaCiudad 10)) unaCiudad
+  | noTieneAtracciones unaCiudad     = modificarCostoDeVida (subtract (porcentajeCostoDeVida unaCiudad 10)) unaCiudad
   | otherwise                        = quitarAtraccion . modificarCostoDeVida  (subtract (porcentajeCostoDeVida unaCiudad 10)) $ unaCiudad
 
 remodelacion :: Int -> Ciudad -> Ciudad
@@ -174,12 +174,18 @@ año2024 = UnAño {
 listaRemodelaciones :: [Evento]
 listaRemodelaciones = map remodelacion [1..]
 
-{- No es posible evaluar el año 2024 en la función eventosOrdenados. 
-Para que eso suceda, debería recorrer completa la lista de números 
-(ya sea utilizando lazy o eager evaluation) que toma remodelación y al
-ser una lista infinita, no termina o se interrumpe por un Stack Overflow. 
-En este caso, se utiliza call-by-value evaluando los parámetros (en este
-caso infinitos) para después pasárselo a la función -}
+{- Si vamos paso a paso, recorriendo la lista de eventos del año 2024
+le aplicamos crisis a la ciudad modificando su costo de vida, luego le 
+aplica reevaluacion 7 y nos cambia nuevamente el costo de vida. Se 
+comparan ambos valores y se espera que el primero analizado sea menor 
+que el segundo, si eso ocurre continua y procede a evaluar los costos de 
+vida despues de aplicar reevaluacion 7 y remodelacion 1. Lo que va a 
+ocurrir es que no se cumple que el costo de vida despues de una reevaluacion 7
+sea menor que el costo de vida de la ciudad despues de remodelacion 1,
+por lo tanto se produce un corte y nos devuelve false. 
+Esto sucede debido a que haskell utiliza lazy evaluation y no necesita
+evaluar la lista completa. Con que una sola comparacion diga que la 
+condicion no es verdadera va tener un corte y una respuesta. -}
 
 discoRayado :: [String]
 discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]

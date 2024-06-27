@@ -121,20 +121,20 @@ losAñosPasan (UnAño _ evento) unaCiudad = foldr (\eventos ciudad -> eventos ci
 algoMejor :: Ciudad->(Ciudad->Int)->Evento->Bool
 algoMejor unaCiudad unCriterio unEvento = (unCriterio.unEvento $ unaCiudad) > (unCriterio unaCiudad)
 
-costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
-costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño eventosQueSubenElCostoDeVida unaCiudad unAño) unaCiudad
+eventosQueVarianElCostoDeVida :: (Evento -> Ciudad -> Bool) -> Año -> Ciudad -> [Evento]
+eventosQueVarianElCostoDeVida unaFuncion (UnAño _ evento) unaCiudad = filter (\eventos -> unaFuncion eventos unaCiudad) evento
 
-eventosQueSubenElCostoDeVida :: Año -> Ciudad -> [Evento]
-eventosQueSubenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> compararCostoDeVida eventos unaCiudad) evento
+costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
+costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño (eventosQueVarianElCostoDeVida compararCostoDeVidaPositivo) unaCiudad unAño) unaCiudad
 
 costoDeVidaQueBaje :: Año -> Ciudad -> Ciudad
-costoDeVidaQueBaje unAño unaCiudad = losAñosPasan (modificarAño eventosQueBajenElCostoDeVida unaCiudad unAño) unaCiudad
+costoDeVidaQueBaje unAño unaCiudad = losAñosPasan (modificarAño (eventosQueVarianElCostoDeVida compararCostoDeVidaNegativo) unaCiudad unAño) unaCiudad
 
-eventosQueBajenElCostoDeVida :: Año -> Ciudad -> [Evento]
-eventosQueBajenElCostoDeVida (UnAño _ evento) unaCiudad = filter (\eventos -> not (compararCostoDeVida eventos unaCiudad)) evento
+compararCostoDeVidaPositivo :: Evento -> Ciudad -> Bool
+compararCostoDeVidaPositivo unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad
 
-compararCostoDeVida :: Evento -> Ciudad -> Bool
-compararCostoDeVida unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad
+compararCostoDeVidaNegativo :: Evento -> Ciudad -> Bool
+compararCostoDeVidaNegativo unEvento unaCiudad = not (compararCostoDeVidaPositivo unEvento unaCiudad)
 
 modificarAño :: (Año -> Ciudad -> [Evento]) -> Ciudad -> Año -> Año
 modificarAño unaFuncion unaCiudad unAño = unAño { evento = unaFuncion unAño unaCiudad}

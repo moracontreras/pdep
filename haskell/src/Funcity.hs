@@ -197,7 +197,5 @@ de estar ordenado el costo de vida de las ciudades de manera creciente, haskell 
 laHistoriaSinFin :: [Año] 
 laHistoriaSinFin = [año2021, año2022] ++ repeat año2023
 
-{- No se puede obtener un resultado al aplicar la función 
-añosOrdenados a la lista laHistoriaSinFin. Se debería recorrer
-la lista completa para luego poder evaluar las condiciones
-de la función, utilizando eager evaluation, pero al ser una lista infinita, no es posible realizarlo.-}
+{- En este caso, como el año2023 se repite infinitamente en la lista, al evaluar la funcion añosOrdenados sobre la lista laHistoriaSinFin siempre va a devolver False dado que la condicion que evalua la funcion es comparar si los costos de vida son crecientes, pero al ser el mismo año esto no sucede. Es posible que haskell retorne una respuesta a esta consulta ya que utiliza lazy evaluation y no necesita recorrer la lista completa para poder analizala. -}
+

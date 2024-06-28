@@ -187,17 +187,15 @@ Esto sucede debido a que haskell utiliza lazy evaluation y no necesita
 evaluar la lista completa. Con que una sola comparacion diga que la 
 condicion no es verdadera va tener un corte y una respuesta. -}
 
-discoRayado :: [String]
-discoRayado = ["Azul", "Nullish"] ++ cycle ["Caleta Olivia", "Baradero"]
+discoRayado :: [Ciudad]
+discoRayado = [azul, nullish] ++ cycle [caletaOlivia, baradero]
 
-{- No hay un resultado posible al evaluar la lista discoRayado con la función ciudadesOrdenadas,
-ya que la función debería aplicar el evento a todas las ciudades de la lista para luego
-evaluar su orden. Utiliza la estrategia basada en la
-evaluacion ansiosa, pero al ser una lista infinita, 
-esta nunca se termina, por lo que no es posible aplicar la función.-}
+{- Al evaluar la funcion ciudadesOrdenadas utilizando la lista discoRayado, se va recorriendo la lista (infinita), comparando los costos de vida de las ciudades de la misma. Si en algun punto de la evaluacion el costo de vida no se encuenta ordenado de manera creciente, se detiene la evaluacion y devuelve False, ya que se usa lazy evaluation, sin necesidad de recorrer la lista completa para obtener un resultado. Al contrario, si la lista cumple con la condicion 
+de estar ordenado el costo de vida de las ciudades de manera creciente, haskell no nos daría una devolucion ya que sigue recorriendo la lista infinitamente al no encontrar un corte no puede devolver True. -}
 
-laHistoriaSinFin :: [Int] 
-laHistoriaSinFin = [2021, 2022] ++ repeat 2023
+
+laHistoriaSinFin :: [Año] 
+laHistoriaSinFin = [año2021, año2022] ++ repeat año2023
 
 {- No se puede obtener un resultado al aplicar la función 
 añosOrdenados a la lista laHistoriaSinFin. Se debería recorrer

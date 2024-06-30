@@ -32,3 +32,9 @@ maipu = UnaCiudad "Maipu" 1878 ["Fortin Kakel"] 115
 
 azul :: Ciudad
 azul = UnaCiudad "Azul" 1832 ["Teatro Español", "Parque Municipal Sarmiento", "Costanera Cacique Catriel"] 190
+
+tieneAtraccionCopada :: Ciudad -> Bool
+tieneAtraccionCopada unaCiudad = (isVowel.atracciones) unaCiudad
+
+isVowel :: Char -> Bool
+isVowel character = character `elem` "aeiouAEIOU"  

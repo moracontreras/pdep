@@ -197,12 +197,24 @@ condicion no es verdadera va tener un corte y una respuesta. -}
 discoRayado :: [Ciudad]
 discoRayado = [azul, nullish] ++ cycle [caletaOlivia, baradero]
 
-{- Al evaluar la funcion ciudadesOrdenadas utilizando la lista discoRayado, se va recorriendo la lista (infinita), comparando los costos de vida de las ciudades de la misma. Si en algun punto de la evaluacion el costo de vida no se encuenta ordenado de manera creciente, se detiene la evaluacion y devuelve False, ya que se usa lazy evaluation, sin necesidad de recorrer la lista completa para obtener un resultado. Al contrario, si la lista cumple con la condicion 
-de estar ordenado el costo de vida de las ciudades de manera creciente, haskell no nos daría una devolucion ya que sigue recorriendo la lista infinitamente al no encontrar un corte no puede devolver True. -}
+{- Al evaluar la funcion ciudadesOrdenadas utilizando la lista discoRayado, 
+se va recorriendo la lista (infinita), comparando los costos de vida de las 
+ciudades de la misma. Si en algun punto de la evaluacion el costo de vida no se 
+encuenta ordenado de manera creciente, se detiene la evaluacion y devuelve False, 
+ya que se usa lazy evaluation, sin necesidad de recorrer la lista completa para 
+obtener un resultado. Al contrario, si la lista cumple con la condicion 
+de estar ordenado el costo de vida de las ciudades de manera creciente, haskell
+no nos daría una devolucion ya que sigue recorriendo la lista infinitamente al 
+no encontrar un corte no puede devolver True. -}
 
 
 laHistoriaSinFin :: [Año] 
 laHistoriaSinFin = [año2021, año2022] ++ repeat año2023
 
-{- En este caso, como el año2023 se repite infinitamente en la lista, al evaluar la funcion añosOrdenados sobre la lista laHistoriaSinFin siempre va a devolver False dado que la condicion que evalua la funcion es comparar si los costos de vida son crecientes, pero al ser el mismo año esto no sucede. Es posible que haskell retorne una respuesta a esta consulta ya que utiliza lazy evaluation y no necesita recorrer la lista completa para poder analizala. -}
+{- En este caso, como el año2023 se repite infinitamente en la lista, al evaluar
+la funcion añosOrdenados sobre la lista laHistoriaSinFin siempre va a devolver
+False dado que la condicion que evalua la funcion es comparar si los costos de vida
+son crecientes, pero al ser el mismo año esto no sucede. Es posible que haskell retorne
+una respuesta a esta consulta ya que utiliza lazy evaluation y no necesita recorrer la 
+lista completa para poder analizala. -}
 

@@ -152,24 +152,25 @@ eventosQueMejoranCiudad unaCiudad unosEventos = filter (algoMejor unaCiudad cost
 año2023 :: Año
 año2023 = UnAño 2023 [crisis, sumarNuevaAtraccion "parque", remodelacion 10, remodelacion 20]
 
-eventosOrdenados :: Ciudad->Año->Bool
-eventosOrdenados unaCiudad (UnAño _ []) = False
-eventosOrdenados unaCiudad (UnAño _ (evento:[])) = True
-eventosOrdenados unaCiudad (UnAño numero (evento1:evento2:restoEventos)) = estaOrdenadoPorCostoDeVida (evento1 unaCiudad) (evento2 unaCiudad) && eventosOrdenados unaCiudad (UnAño numero (evento2:restoEventos))
+estaOrdenado :: [Int]->Bool
+estaOrdenado [] = False
+estaOrdenado (primero:[]) = True
+estaOrdenado (primero:segundo:resto) = (primero < segundo) && estaOrdenado resto
 
-estaOrdenadoPorCostoDeVida :: Ciudad->Ciudad->Bool
-estaOrdenadoPorCostoDeVida unaCiudad otraCiudad = costoDeVida unaCiudad < costoDeVida otraCiudad
+eventosOrdenados :: Ciudad -> Año -> Bool
+eventosOrdenados unaCiudad (UnAño _ eventos) = estaOrdenadoPorCostoDeVida.map (hacerEvento unaCiudad) $ eventos 
+
+hacerEvento :: Ciudad ->Evento->Ciudad
+hacerEvento unaCiudad unEvento = unEvento unaCiudad
 
 ciudadesOrdenadas :: [Ciudad]->Evento->Bool
-ciudadesOrdenadas [] _ = False
-ciudadesOrdenadas (ciudad:[]) _ = True
-ciudadesOrdenadas (ciudad1:ciudad2:restoCiudades) unEvento = estaOrdenadoPorCostoDeVida (unEvento ciudad1) (unEvento ciudad2) && ciudadesOrdenadas (ciudad2:restoCiudades) unEvento
+ciudadesOrdenadas unasCiudades unEvento = estaOrdenadoPorCostoDeVida.map unEvento $ unasCiudades
 
 añosOrdenados :: Ciudad->[Año]->Bool
-añosOrdenados unaCiudad [] = False
-añosOrdenados unaCiudad (año:[]) = True
-añosOrdenados unaCiudad (año1:año2:restoAños) = estaOrdenadoPorCostoDeVida (losAñosPasan año1 unaCiudad) (losAñosPasan año2 unaCiudad) && añosOrdenados unaCiudad (año2:restoAños) 
+añosOrdenados unaCiudad unosAños = estaOrdenadoPorCostoDeVida.map (flip losAñosPasan unaCiudad) $ unosAños
 
+estaOrdenadoPorCostoDeVida :: [Ciudad]->Bool
+estaOrdenadoPorCostoDeVida unasCiudades = estaOrdenado.map costoDeVida $ unasCiudades
 
 año2021 :: Año
 año2021 = UnAño 2021 [crisis, sumarNuevaAtraccion "playa"]

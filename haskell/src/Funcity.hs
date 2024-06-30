@@ -125,10 +125,13 @@ eventosQueVarianElCostoDeVida :: (Evento -> Ciudad -> Bool) -> Año -> Ciudad ->
 eventosQueVarianElCostoDeVida unaFuncion (UnAño _ evento) unaCiudad = filter (\eventos -> unaFuncion eventos unaCiudad) evento
 
 costoDeVidaQueSuba :: Año -> Ciudad -> Ciudad
-costoDeVidaQueSuba unAño unaCiudad = losAñosPasan (modificarAño (eventosQueVarianElCostoDeVida compararCostoDeVidaPositivo) unaCiudad unAño) unaCiudad
+costoDeVidaQueSuba unAño unaCiudad = aplicarEventos compararCostoDeVidaPositivo unAño unaCiudad
 
 costoDeVidaQueBaje :: Año -> Ciudad -> Ciudad
-costoDeVidaQueBaje unAño unaCiudad = losAñosPasan (modificarAño (eventosQueVarianElCostoDeVida compararCostoDeVidaNegativo) unaCiudad unAño) unaCiudad
+costoDeVidaQueBaje unAño unaCiudad = aplicarEventos compararCostoDeVidaNegativo unAño unaCiudad
+
+aplicarEventos :: (Evento -> Ciudad -> Bool) -> Año -> Ciudad -> Ciudad
+aplicarEventos unaFuncion unAño unaCiudad = losAñosPasan (modificarAño (eventosQueVarianElCostoDeVida unaFuncion) unaCiudad unAño) unaCiudad
 
 compararCostoDeVidaPositivo :: Evento -> Ciudad -> Bool
 compararCostoDeVidaPositivo unEvento unaCiudad = costoDeVida (unEvento unaCiudad) > costoDeVida unaCiudad

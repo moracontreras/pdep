@@ -1,21 +1,40 @@
 %punto1
-% persona(Nombre, Profesion, Gusto, Habilidad, HistorialCriminal)
+persona(bakunin).
+persona(ravachol).
+persona(rosaDubovsky).
+persona(emmaGoldman).
+persona(judithButler).
+persona(elisaBachofen).
+persona(juanSuriano).
+persona(sebastianFaure).
 
-persona(bakunin, aviacionMilitar, noTiene, manejandoAutos, roboDeAeronaves).
-persona(bakunin, aviacionMilitar, noTiene, manejandoAutos, fraude).
-persona(bakunin, aviacionMilitar, noTiene, manejandoAutos, tenenciaDeCafeina).
-persona(ravachol, inteligenciaMilitar, juegosDeAzar, tiroAlBlanco, falsificacionDeVacunas).
-persona(ravachol, inteligenciaMilitar, ajedrez, tiroAlBlanco, fraude).
-persona(ravachol, inteligenciaMilitar, tiroAlBlanco, tiroAlBlanco, fraude).
-persona(rosaDubovsky, recolectorDeBasura, construirPuentes, construyendoPuentes, noTiene).
-persona(rosaDubovsky, asesinaASueldo, mirarPeppaPig, mirandoPeppaPig, noTiene).
-persona(rosaDubovsky, asesinaASueldo, fisicaCuantica, mirandoPeppaPig, noTiene).
-persona(emmaGoldman, profesoraDeJudo, judo, judo, noTiene).
-persona(emmaGoldman, cineasta, carrerasdeAutomovilismo, armandoBombas, noTiene).
-persona(judithButler, profesoraDeJudo, judo, judo, falsificacionDeCheques).
-persona(judithButler, inteligenciaMilitar, carrerasdeAutomovilismo, judo, fraude).
-persona(elisaBachofen, ingenieriaMecanica, fuego, armandoBombas, noTiene).
-persona(elisaBachofen, ingenieriaMecanica, destruccion, armandoBombas, noTiene).
-persona(juanSuariano, noSeSabe, judo, judo, falsificacionDeDinero).
-persona(juanSuariano, noSeSabe, armarBombas, armandoBombas, fraude).
-persona(juanSuariano, noSeSabe, ringraje, ringraje, fraude).
+trabaja([aviacionMilitar],bakunin).
+trabaja([inteligenciaMilitar],ravachol).
+trabaja([profesoraJudo,cineasta], emmaGoldman).
+trabaja([profesoraJudo,inteligenciaMilitar],judithButler).
+trabaja(inteligenciaMecanica,elisaBachofen).
+
+tieneGustos([juegosDeAzar,ajedrez,tiroAlBlanco],ravacol).
+tieneGustos([construirPuentes,mirarPeppaPig,fisicaCuantica],rosaDubovsky).
+tieneGustos([judo,carrerasDeAutomovilismo], emmaGoldman).
+tieneGustos([judo,carrerasDeAutomovilismo],judithButler).
+tieneGustos([fuego,destruccion],elisaBachofen).
+tieneGustos([judo,armarBobas,ring-raje],juanSuriano).
+
+habilidadesDe(bakunin,[conducirAutos]).
+habilidadesDe(ravacol,[tiroAlBlanco]).
+habilidadesDe(rosaDubovsky,[construirPuentes,mirarPeppaPig]).
+habilidadesDe(emmaGoldman,[judo,armarBombas]).
+habilidadesDe(judithButler,[judo]).
+habilidadesDe(elisaBachofen,[armarBombas]).
+habilidadesDe(juanSuriano,[judo,armarBobas,ring-raje]).
+
+tieneHabilidad(Habilidad,Alguien):-
+    persona(Alguien),
+    habilidadesDe(Alguien,Habilidades),
+    member(Habilidad,Habilidades).
+
+historialCriminal([roboAeronaves,fraude,tenenciaCafeina],bakunin).
+historialCriminal([falsificacionVacunas,fraude],ravacol).
+historialCriminal([falsificacionCheques,fraude],judithButler).
+historialCriminal([falsificacionDinero,fraude],juanSuriano).

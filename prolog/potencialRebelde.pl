@@ -43,10 +43,26 @@ historialCriminal([falsificacionDinero,fraude],juanSuriano).
 tieneVivienda([bakunin,elisaBachofen,rosaDubovsky],laSaverino).
 tieneVivienda([ravachol],comisaria48).
 tieneVivienda([emmaGoldman,juanSuriano,judithButler],laCasaDePapel).
+tieneVivienda([],casaDelSolNaciente).
 
 tieneEsconditesVivienda(laSaverino,[cuatoSecreto(4,8),pasadizos(1),tunel(8,construido),tunel(5,construido),tunel(1,enConstruccion)]).
 tieneEsconditesVivienda(laCasaDePapel,[pasadizos(2),cuartoSecreto(5,3),cuartoSecreto(4,7),tunel(9,construido),tunel(2,construido)]).
 tieneEsconditesVivienda(casaDelSolNaciente,[pasadizos(1),tunel(3,sinConstruir)]).
+
+%Punto 3
+
+%Punto 4
+
+nadieViveEnVivienda(Vivienda) :-
+    tieneVivienda(Residentes, Vivienda),
+    length(Residentes, 0).
+
+tienenElementosEnComun(Lista1, Lista2) :-
+    member(Elemento, Lista1),
+    member(Elemento, Lista2).
+
+gustosEnComun(Vivienda) :-
+    tieneVivienda(Residentes, Vivienda).
 
 % PUNTO 5
 

@@ -62,7 +62,9 @@ tienenElementosEnComun(Lista1, Lista2) :-
     member(Elemento, Lista2).
 
 gustosEnComun(Vivienda) :-
-    tieneVivienda(Residentes, Vivienda).
+    tieneVivienda(Residentes, Vivienda),
+    forall((member(Persona,Residentes), member(Conviviente,Residentes), Persona\=Conviviente),
+    (tieneGustos(Gustos1,Persona), tieneGustos(Gustos2,Conviviente), tienenElementosEnComun(Gustos1,Gustos2))).
 
 % PUNTO 5
 

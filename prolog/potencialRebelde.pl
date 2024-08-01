@@ -45,11 +45,44 @@ tieneVivienda([ravachol],comisaria48).
 tieneVivienda([emmaGoldman,juanSuriano,judithButler],laCasaDePapel).
 tieneVivienda([],casaDelSolNaciente).
 
-tieneEsconditesVivienda(laSaverino,[cuatoSecreto(4,8),pasadizos(1),tunel(8,construido),tunel(5,construido),tunel(1,enConstruccion)]).
+tieneEsconditesVivienda(laSaverino,[cuartoSecreto(4,8),pasadizos(1),tunel(8,construido),tunel(5,construido),tunel(1,enConstruccion)]).
 tieneEsconditesVivienda(laCasaDePapel,[pasadizos(2),cuartoSecreto(5,3),cuartoSecreto(4,7),tunel(9,construido),tunel(2,construido)]).
 tieneEsconditesVivienda(casaDelSolNaciente,[pasadizos(1),tunel(3,sinConstruir)]).
 
 %Punto 3
+viviendaConPotencialRebelde(Vivienda):-
+    viveAlgunPosibleDisidente(Vivienda),
+    superficieTotalClandestina(Vivienda, SuperficieTotal),
+    SuperficieTotal > 50.
+
+viveAlgunPosibleDisidente(Vivienda):-
+    tieneVivienda(Residentes, Vivienda),
+    member(Residente, Residentes),
+    esPosibleDisidente(Residente).
+
+
+superficieTotalClandestina(Vivienda, SuperficieTotal):-
+    tieneEsconditesVivienda(Vivienda, Escondites),
+    findall(Superficie, (member(Escondite, Escondites), calcularSuperficie(Escondite, Superficie)), Superficies),
+    sumlist(Superficies, SuperficieTotal).
+
+calcularSuperficie(cuartoSecreto(Largo, Ancho), Superficie):-
+    superficieCuartoSecreto(Largo, Ancho, Superficie).
+
+calcularSuperficie(tunel(Longitud, Estado), Superficie):-
+    superficieTunel(Longitud, Estado, Superficie).
+
+calcularSuperficie(pasadizos(Cantidad), Superficie):-
+    Superficie is Cantidad.
+
+superficieCuartoSecreto(Largo, Ancho, Superficie):-
+    Superficie is Largo * Ancho.
+
+superficieTunel(Longitud, construido , Superficie):-
+    Superficie is Longitud * 2.
+
+superficieTunel(_, enConstruccion, 0).
+
 
 %Punto 4
 
@@ -87,15 +120,22 @@ tieneHabilidadesTerroristas(Alguien):-
     esActividadTerrorista(Habilidad).
 
 convivientesDe(Persona, Convivientes) :-
-    tieneVivienda(Convivientes, Vivienda),
+    tieneVivienda(Convivientes, _),
     member(Persona, Convivientes).
 
 largoHistorialCriminalEnVivienda(Alguien):-
     convivientesDe(Alguien,Convivientes),
-    member(unConviviente,Convivientes),
-    tieneLargoHistorialCriminal(unConviviente).
+    member(UnConviviente,Convivientes),
+    tieneLargoHistorialCriminal(UnConviviente).
 
 tieneLargoHistorialCriminal(Alguien):-
     historialCriminal(Historial,Alguien),
     length(Historial,Largo),
     Largo > 1.
+
+esPosibleDisidente(Alguien):-
+    tieneHabilidadesTerroristas(Alguien),
+    noTieneGustosOSoloTieneBuenos(Alguien),
+    largoHistorialCriminalEnVivienda(Alguien).
+
+

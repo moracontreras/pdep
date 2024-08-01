@@ -138,4 +138,16 @@ esPosibleDisidente(Alguien):-
     noTieneGustosOSoloTieneBuenos(Alguien),
     largoHistorialCriminalEnVivienda(Alguien).
 
+/* PUNTO 6
+Para agregar a un nuevo tipo de ambiente en la vivivendas, en este caso a los bunkers,
+se debera agregar en el punto 3 una nueva clausula del predicado "calcularSuperficie" que
+tendra otra clausula  llamada "superficieBunker", que relacionara a la superficie con la suma
+de el perimetro de acceso y la superficie interna.
 
+
+calcularSuperficie(bunker(PerimetroDeAcceso , SuperficieInterna ), Superficie):-
+    superficieBunker(PerimetroDeAcceso , SuperficieInterna , Superficie).
+
+superficieBunker(PerimetroDeAcceso , SuperficieInterna , Superficie):-
+    Superficie is SuperficieInterna + PerimetroDeAcceso.
+*/

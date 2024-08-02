@@ -151,3 +151,15 @@ calcularSuperficie(bunker(PerimetroDeAcceso , SuperficieInterna ), Superficie):-
 superficieBunker(PerimetroDeAcceso , SuperficieInterna , Superficie):-
     Superficie is SuperficieInterna + PerimetroDeAcceso.
 */
+
+%Punto 7
+
+totalHabilidades(Personas, Total) :-
+    persona(Persona),
+    findall(Cantidad, (member(Persona, Personas), habilidadesDe(Persona, Habilidades), length(Habilidades, Cantidad)), Cantidades),
+    sumlist(Cantidades, Total).
+
+batallonRebelde(Batallon):-
+    findall(Persona, (persona(Persona), largoHistorialCriminalEnVivienda(Persona)), Batallon),
+    totalHabilidades(Batallon, Total),
+    Total>3.

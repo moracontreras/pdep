@@ -72,8 +72,7 @@ calcularSuperficie(cuartoSecreto(Largo, Ancho), Superficie):-
 calcularSuperficie(tunel(Longitud, Estado), Superficie):-
     superficieTunel(Longitud, Estado, Superficie).
 
-calcularSuperficie(pasadizos(Cantidad), Superficie):-
-    Superficie is Cantidad.
+calcularSuperficie(pasadizos(Cantidad), Cantidad).
 
 superficieCuartoSecreto(Largo, Ancho, Superficie):-
     Superficie is Largo * Ancho.

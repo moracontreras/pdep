@@ -1,35 +1,38 @@
 import armas.*
 
-object gandalf {
-
-  var property nivelDeVida = 0  
-  const armas = #{}
-  const poderBaculo = 400
-  
-  var property origen = "elfico"
-
-  method poderBaculo() = poderBaculo
-  method armas() = armas
-
-  method agregarArma(unArma) {
-    armas.add(unArma)
-  }
-
-  method sacarArma(unArma) {
-    armas.remove(unArma)
-  }
-
-  method poderGuerrero() {
-    if (nivelDeVida < 10) {
-        return (nivelDeVida * 300) + (self.sumaPoderArmas() * 2)
-    } else {
-        return (nivelDeVida * 15) + (self.sumaPoderArmas() * 2)
+class Guerrero{
+    var cantidadDeVida = 0
+    var armas = []
+    method armas() = armas
+    method poderArmas(){
+        return armas.map({unArma=> unArma.poder()}).sum()
     }
-  }
-
-  method sumaPoderArmas() {
-    return armas.sum({unArma => unArma.poderArma(self)})
-  }
-
-
+    method cantidadDeVida(unaCantidad){
+        cantidadDeVida = (unaCantidad.max(0)).min(100)
+    }
+    method poder(){
+        if(cantidadDeVida<10)
+        return cantidadDeVida*300 + self.poderArmas()*2
+        else
+        return cantidadDeVida*15 + self.poderArmas()*2
+    }
+    method cantidadDeVida()= cantidadDeVida
+        method agregarArma(unArma){
+        armas.add(unArma)
+    }
+    method eliminarUnArma(unArma){
+        armas.remove(unArma)
+    }
+    method vaciarArmas(){
+        armas.clear()
+    }
+    method perderVida(unaCantidad){
+        cantidadDeVida -= unaCantidad
+    }
+    method aumentarVida(){
+        cantidadDeVida +=1
+    }
+    method tienePoderSuperiorA1500(){
+        return self.poder()>1500
+    }
 }

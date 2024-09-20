@@ -1,23 +1,18 @@
 import guerreros.*
 object baculo {
-  method poderArma(guerrero) {
-    return guerrero.poderBaculo()
-  }
+  const property poder = 400 
 }
 
 object espada {
-  
-  method valorSegunOrigen(guerrero) {
-    if (guerrero.origen() == "elfico") {
-        return 25
-    } else if (guerrero.origen() == "enano") {
-        return 20
-    } else {
-        return 15
-    }
-  }
+  var property origen = "Elfico"
 
-  method poderArma(guerrero) {
-    return 10 * self.valorSegunOrigen(guerrero)
+  method poder() {
+    if (origen == "Elfico") {
+        return 10 * 25
+    } else if (origen == "Enano") {
+        return 10 * 20
+    } else {
+        return 10 * 15
+    }
   }
 }

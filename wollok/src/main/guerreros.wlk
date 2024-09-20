@@ -36,3 +36,12 @@ class Guerrero{
         return self.poder()>1500
     }
 }
+
+const gandalf = new Guerrero(
+    cantidadDeVida = 100,
+    armas = [baculo, espada]
+)
+
+const tom = new Guerrero(
+    armas = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
+)

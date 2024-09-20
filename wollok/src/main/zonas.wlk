@@ -29,3 +29,18 @@ object lossarnach{
             guerrero.aumentarVida()
     }
 }
+
+object caminoDeGondor {
+  var camino = #{lebennin , minasTirith}
+
+  method modificarCamino(partida , llegada) {
+    camino = #{partida , llegada}
+  }
+
+  method puedeAtravesar(guerrero) = camino.all({unaZona => unaZona.puedePasar(guerrero)})
+  
+  method recorrerCamino(guerrero) {
+    if(self.puedeAtravesar(guerrero))
+        camino.forEach({unaZona => unaZona.atravesar(guerrero)})
+  }
+}

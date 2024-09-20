@@ -609,3 +609,9 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":160,"timestamp":"2024-09-20T22:13:18.887Z"}
 {"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":174,"timestamp":"2024-09-20T22:13:19.063Z"}
 {"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":168,"timestamp":"2024-09-20T22:13:19.320Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":173,"timestamp":"2024-09-20T22:42:14.673Z"}
+{"level":"info","message":"onRequest - WORKSPACE_URI:file:///c%3A/Users/majoz/Documents/Haskell/Paradigamas/grupo-09-2024","timestamp":"2024-09-20T22:42:14.677Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":124,"timestamp":"2024-09-20T22:42:15.046Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":112,"timestamp":"2024-09-20T22:42:15.250Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/guerreros.wlk","timeElapsed":104,"timestamp":"2024-09-20T22:42:15.355Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":115,"timestamp":"2024-09-20T22:42:15.471Z"}

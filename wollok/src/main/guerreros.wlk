@@ -1,5 +1,4 @@
 import armas.*
-import zonas.*
 
 object gandalf {
 
@@ -32,9 +31,5 @@ object gandalf {
     return armas.sum({unArma => unArma.poderArma(self)})
   }
 
-  method recorrer(zona) {
-    if (zona.permitePasarA(self)) {
-      nivelDeVida = zona.consecuencias(self)
-    }
-  }
+
 }

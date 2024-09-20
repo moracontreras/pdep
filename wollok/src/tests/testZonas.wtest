@@ -1,0 +1,42 @@
+import main.guerreros.*
+import main.zonas.*
+import main.armas.*
+
+
+describe "test zonas" {
+  test "gandalf con 100 de vida y todas sus armas, puede atravesar lebennin" {
+    gandalf.nivelDeVida(100)
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espada)
+
+    assert.that(lebennin.permitePasarA(gandalf))
+  }
+
+  test "gandalf sin armas y con 11 de vida puede atravesar lebennin" {
+    gandalf.nivelDeVida(11)
+    assert.notThat(lebennin.permitePasarA(gandalf))
+  }
+
+  test "gandalf sin armas y con 11 de vida puede atravesar minas tirith" {
+    gandalf.nivelDeVida(11)
+    assert.notThat(minasTirith.permitePasarA(gandalf))
+  }
+
+  test "gandalf con 100 de vida y todas sus armas, puede atravesar el camino compuesto por lebennin y minas tirith" {
+    gandalf.nivelDeVida(100)
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espada)
+
+    assert.that(caminoDeGondor.permitePasarA(gandalf))
+  }
+
+  test "gandalf con 100 de vida y todas sus armas, atraviesa el camino de gondor y queda con 90 de vida" {
+    gandalf.nivelDeVida(100)
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espada)
+    gandalf.recorrer(caminoDeGondor)
+
+
+    assert.equals(90, gandalf.nivelDeVida())
+  }
+}

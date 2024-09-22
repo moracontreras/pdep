@@ -6,6 +6,10 @@ object baculo {
 object espada {
   var property origen = "Elfico"
 
+  method cambiarOrigen(origenNuevo) {
+    origen = origenNuevo
+  }
+
   method poder() {
     if (origen == "Elfico") {
         return 10 * 25

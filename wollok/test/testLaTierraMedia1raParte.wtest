@@ -2,30 +2,36 @@ import src.main.armas.*
 import src.main.guerreros.*
 import src.main.zonas.*
 
-describe "Poder de Gandalf" {
-  test "Con toda la vida y todas sus armas" {
+describe "gandalf" {
+  test "Poder de Gandalf con toda la vida y todas sus armas"{
+    gandalf.cantidadDeVida(100)
+    gandalf.vaciarArmas()
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espada)
+    espada.version("Elfica")
     assert.equals(2800,gandalf.poder())
   }
-  test "Sin armas y con 80 de vida " {
-    gandalf.vaciarArmas()
+  test "Poder de Gandalf sin armas y con 80 de vida"{
     gandalf.cantidadDeVida(80)
+    gandalf.vaciarArmas()
     assert.equals(1200,gandalf.poder())
   }
-  test "Con 5 de vida y su baculo" {
+  test "Poder de Gandalf con 5 de vida y su báculo"{
     gandalf.cantidadDeVida(5)
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
     assert.equals(2300,gandalf.poder())
   }
-  test "Con 30 de vida, su baculo y su espada pero version enana" {
+    test "Poder de Gandalf con 30 de vida, su báculo y su espada pero versión enana"{
     gandalf.cantidadDeVida(30)
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
     gandalf.agregarArma(espada)
-    espada.cambiarOrigen("Enano")
+    espada.version("Enana")
     assert.equals(1650,gandalf.poder())
   }
 }
+
 
 describe "Zonas y Caminos" {
   test "Gandalf full vida y con sus armas, puede atravesar Lebennin" {

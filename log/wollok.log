@@ -638,3 +638,32 @@
 {"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":149,"timestamp":"2024-09-21T17:35:26.755Z"}
 {"level":"info","message":"⌛ Validating wollok/src/main/guerreros.wlk","timeElapsed":178,"timestamp":"2024-09-21T17:35:26.934Z"}
 {"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":114,"timestamp":"2024-09-21T17:35:27.048Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":160,"timestamp":"2024-09-22T16:29:10.168Z"}
+{"level":"info","message":"onRequest - WORKSPACE_URI:file:///c%3A/Users/majoz/Documents/Haskell/Paradigamas/grupo-09-2024","timestamp":"2024-09-22T16:29:10.171Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":116,"timestamp":"2024-09-22T16:29:10.443Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":130,"timestamp":"2024-09-22T16:29:10.573Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":103,"timestamp":"2024-09-22T16:29:10.677Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":101,"timestamp":"2024-09-22T16:29:10.779Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/guerreros.wlk","timeElapsed":115,"timestamp":"2024-09-22T16:29:10.902Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":102,"timestamp":"2024-09-22T16:29:11.004Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/guerreros.wlk","timeElapsed":188,"timestamp":"2024-09-22T16:29:11.275Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":155,"timestamp":"2024-09-22T16:36:22.482Z"}
+{"level":"info","message":"onRequest - WORKSPACE_URI:file:///c%3A/Users/majoz/Documents/Haskell/Paradigamas/grupo-09-2024","timestamp":"2024-09-22T16:36:22.485Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":119,"timestamp":"2024-09-22T16:36:22.694Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/armas.wlk","timeElapsed":127,"timestamp":"2024-09-22T16:36:22.908Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":106,"timestamp":"2024-09-22T16:36:23.120Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":103,"timestamp":"2024-09-22T16:38:51.920Z"}
+{"level":"info","message":"onRequest - STRONG_FILES_CHANGED:c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024\\wollok\\test\\testTierraMedia1raParte.twlk","timestamp":"2024-09-22T16:38:51.921Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":135,"timestamp":"2024-09-22T16:38:52.057Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":119,"timestamp":"2024-09-22T16:38:52.176Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testTierraMedia1raParte.wtest","timeElapsed":103,"timestamp":"2024-09-22T16:38:52.285Z"}
+{"level":"info","message":"Removing diagnostics from \\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024\\wollok\\test\\testTierraMedia1raParte.twlk","timestamp":"2024-09-22T16:38:52.286Z"}
+{"level":"info","message":"onRequest - WORKSPACE_URI:file:///c%3A/Users/majoz/Documents/Haskell/Paradigamas/grupo-09-2024","timestamp":"2024-09-22T16:38:52.287Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testTierraMedia1raParte.wtest","timeElapsed":120,"timestamp":"2024-09-22T16:39:04.030Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testTierraMedia1raParte.wtest","timeElapsed":109,"timestamp":"2024-09-22T16:39:19.858Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testTierraMedia1raParte.wtest","timeElapsed":101,"timestamp":"2024-09-22T16:39:22.717Z"}
+{"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024","result":{"failed":0,"ok":1},"timeElapsed":380,"timestamp":"2024-09-22T16:39:39.269Z"}
+{"level":"info","message":"⌛ Validating wollok/src/main/guerreros.wlk","timeElapsed":119,"timestamp":"2024-09-22T16:40:09.146Z"}
+{"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024","result":{"failed":0,"ok":1},"timeElapsed":369,"timestamp":"2024-09-22T16:40:15.196Z"}
+{"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024","result":{"failed":0,"ok":1},"timeElapsed":346,"timestamp":"2024-09-22T16:40:18.393Z"}
+{"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024","result":{"failed":0,"ok":4},"timeElapsed":364,"timestamp":"2024-09-22T16:40:27.259Z"}

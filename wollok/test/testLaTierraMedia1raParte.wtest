@@ -1,0 +1,28 @@
+import src.main.armas.*
+import src.main.guerreros.*
+import src.main.zonas.*
+
+describe "Poder de Gandalf" {
+  test "Con toda la vida y todas sus armas" {
+    assert.equals(2800,gandalf.poder())
+  }
+  test "Sin armas y con 80 de vida " {
+    gandalf.vaciarArmas()
+    gandalf.cantidadDeVida(80)
+    assert.equals(1200,gandalf.poder())
+  }
+  test "Con 5 de vida y su baculo" {
+    gandalf.cantidadDeVida(5)
+    gandalf.vaciarArmas()
+    gandalf.agregarArma(baculo)
+    assert.equals(2300,gandalf.poder())
+  }
+  test "Con 30 de vida, su baculo y su espada pero version enana" {
+    gandalf.cantidadDeVida(30)
+    gandalf.vaciarArmas()
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espada)
+    espada.cambiarOrigen("Enano")
+    assert.equals(1650,gandalf.poder())
+  }
+}

@@ -8,7 +8,6 @@ describe "gandalf" {
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
     gandalf.agregarArma(espada)
-    espada.version("Elfica")
     assert.equals(2800,gandalf.poder())
   }
   test "Poder de Gandalf sin armas y con 80 de vida"{
@@ -27,7 +26,7 @@ describe "gandalf" {
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
     gandalf.agregarArma(espada)
-    espada.version("Enana")
+    espada.cambiarOrigen("Enano")
     assert.equals(1650,gandalf.poder())
   }
 }
@@ -38,7 +37,6 @@ describe "zonas y caminos"{
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espada)
-        espada.version("Elfica")
         assert.that(lebennin.puedePasar(gandalf))
     }
     test "Gandalf sin armas y con 11 de vida puede atravesar Lebennin"{
@@ -52,22 +50,18 @@ describe "zonas y caminos"{
         assert.notThat(minasTirith.puedePasar(gandalf))
     }     
     test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith"{
-        caminoDeGondor.inicio(lebennin)
-        caminoDeGondor.fin(minasTirith)
+        caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espada)
-        espada.version("Elfica")
-        assert.that(caminoDeGondor.puedePasar(gandalf))
+        assert.that(caminoDeGondor.puedeAtravesar(gandalf))
     }       
     test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith"{
-        caminoDeGondor.inicio(lebennin)
-        caminoDeGondor.fin(minasTirith)
+        caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espada)
-        espada.version("Elfica")
-        caminoDeGondor.atravesar(gandalf)
+        caminoDeGondor.recorrerCamino(gandalf)
         assert.equals(90, gandalf.cantidadDeVida())
     }       
 }

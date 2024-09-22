@@ -689,3 +689,7 @@
 {"level":"info","message":"⌛ Validating wollok/src/main/zonas.wlk","timeElapsed":191,"timestamp":"2024-09-22T16:55:10.378Z"}
 {"level":"info","message":"⌛ Validating wollok/test/testLaTierraMedia1raParte.wtest","timeElapsed":131,"timestamp":"2024-09-22T16:55:18.874Z"}
 {"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\majoz\\Documents\\Haskell\\Paradigamas\\grupo-09-2024","result":{"failed":0,"ok":5},"timeElapsed":529,"timestamp":"2024-09-22T16:55:35.969Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":102,"timestamp":"2024-09-22T17:16:52.139Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testLaTierraMedia1raParte.wtest","timeElapsed":115,"timestamp":"2024-09-22T17:16:52.255Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testLaTierraMedia1raParte.wtest","timeElapsed":112,"timestamp":"2024-09-22T17:16:52.638Z"}
+{"level":"info","message":"⌛ Validating wollok/test/testLaTierraMedia1raParte.wtest","timeElapsed":119,"timestamp":"2024-09-22T17:16:53.203Z"}

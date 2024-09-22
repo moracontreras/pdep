@@ -51,3 +51,15 @@ describe "Zonas y Caminos" {
     assert.equals(90, gandalf.cantidadDeVida())
   }
 }
+
+describe "tom"{
+  test "Tom puede atravesar Lebennin"{
+    assert.that(lebennin.puedePasar(tom))
+  }
+  test "Tom atraviesa el camino que pasa por Gondor antes mencionado"{
+    const estadoInicial = tom
+    caminoDeGondor.recorrerCamino(tom)
+    const estadoFinal = tom
+    assert.equals(estadoInicial,estadoFinal)
+    }
+}

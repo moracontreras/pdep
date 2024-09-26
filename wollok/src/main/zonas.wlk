@@ -15,7 +15,7 @@ object minasTirith{
         if (guerrero == tom)
             return true
         else        
-            return ! guerrero.armas().isEmpty()
+            return guerrero.tieneArmas()
     }
     method atravesar(guerrero){
         if (guerrero != tom)

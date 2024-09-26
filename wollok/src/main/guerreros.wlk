@@ -5,16 +5,19 @@ class Guerrero{
     var armas = []
     method armas() = armas
     method poderArmas(){
-        return armas.map({unArma=> unArma.poder()}).sum()
+        return armas.sum({unArma=> unArma.poder()})
     }
     method cantidadDeVida(unaCantidad){
         cantidadDeVida = (unaCantidad.max(0)).min(100)
     }
+    method obtenerPoder(unaCantidad){
+        return cantidadDeVida*unaCantidad + self.poderArmas()*2
+    }
     method poder(){
         if(cantidadDeVida<10)
-        return cantidadDeVida*300 + self.poderArmas()*2
+        return self.obtenerPoder(300)
         else
-        return cantidadDeVida*15 + self.poderArmas()*2
+        return self.obtenerPoder(15)
     }
     method cantidadDeVida()= cantidadDeVida
         method agregarArma(unArma){
@@ -35,13 +38,18 @@ class Guerrero{
     method tienePoderSuperiorA1500(){
         return self.poder()>1500
     }
+    method tieneArmas(){
+        return ! armas.isEmpty()
+    }
 }
 
 const gandalf = new Guerrero(
     cantidadDeVida = 100,
-    armas = [baculo, espada]
+    armas = [baculo, espadaElfica]
 )
 
-const tom = new Guerrero(
-    armas = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
-)
+object tom{
+    var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
+    method puedePasar(unaZona) = true
+    method vestimenta() = vestimenta
+}

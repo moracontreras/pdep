@@ -7,7 +7,7 @@ describe "gandalf" {
     gandalf.cantidadDeVida(100)
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
-    gandalf.agregarArma(espada)
+    gandalf.agregarArma(espadaElfica)
     assert.equals(2800,gandalf.poder())
   }
   test "Poder de Gandalf sin armas y con 80 de vida"{
@@ -25,8 +25,7 @@ describe "gandalf" {
     gandalf.cantidadDeVida(30)
     gandalf.vaciarArmas()
     gandalf.agregarArma(baculo)
-    gandalf.agregarArma(espada)
-    espada.cambiarOrigen("Enano")
+    gandalf.agregarArma(espadaEnana)
     assert.equals(1650,gandalf.poder())
   }
 }
@@ -36,7 +35,7 @@ describe "zonas y caminos"{
     test "Gandalf full vida y con sus armas, puede atravesar Lebennin"{
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
-        gandalf.agregarArma(espada)
+        gandalf.agregarArma(espadaElfica)
         assert.that(lebennin.puedePasar(gandalf))
     }
     test "Gandalf sin armas y con 11 de vida puede atravesar Lebennin"{
@@ -53,14 +52,14 @@ describe "zonas y caminos"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
-        gandalf.agregarArma(espada)
+        gandalf.agregarArma(espadaElfica)
         assert.that(caminoDeGondor.puedeAtravesar(gandalf))
     }       
     test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
-        gandalf.agregarArma(espada)
+        gandalf.agregarArma(espadaElfica)
         caminoDeGondor.recorrerCamino(gandalf)
         assert.equals(90, gandalf.cantidadDeVida())
     }       
@@ -72,9 +71,9 @@ describe "tom"{
     assert.that(lebennin.puedePasar(tom))
   }
   test "Tom atraviesa el camino que pasa por Gondor antes mencionado"{
-    const estadoInicial = tom
+    const estadoInicial = tom.vestimenta()
     caminoDeGondor.recorrerCamino(tom)
-    const estadoFinal = tom
+    const estadoFinal = tom.vestimenta()
     assert.equals(estadoInicial,estadoFinal)
     }
 }

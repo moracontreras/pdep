@@ -1,22 +1,32 @@
 import guerreros.*
-object baculo {
-  const property poder = 400 
+
+class Arma {
+  method poder()
 }
 
-object espada {
-  var property origen = "Elfico"
 
-  method cambiarOrigen(origenNuevo) {
-    origen = origenNuevo
-  }
+class Baculo inherits Arma {
+  const poder = 0
+  override method poder() = poder 
+}
 
-  method poder() {
-    if (origen == "Elfico") {
-        return 10 * 25
-    } else if (origen == "Enano") {
-        return 10 * 20
-    } else {
-        return 10 * 15
-    }
+const baculo = new Baculo (poder = 400)
+
+class Espada inherits Arma{
+  const poderPorOrigen = 0
+  override method poder(){
+    return 10* poderPorOrigen
   }
 }
+
+const espadaElfica = new Espada(
+  poderPorOrigen = 30
+)
+
+const espadaEnana = new Espada(
+  poderPorOrigen = 20
+)
+
+const espadaHumana = new Espada(
+  poderPorOrigen = 15
+)

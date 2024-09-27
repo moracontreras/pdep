@@ -36,31 +36,31 @@ describe "zonas y caminos"{
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espadaElfica)
-        assert.that(lebennin.puedePasar(gandalf))
+        assert.that(lebennin.puedePasarGuerrero(gandalf))
     }
     test "Gandalf sin armas y con 11 de vida puede atravesar Lebennin"{
         gandalf.cantidadDeVida(11)
         gandalf.vaciarArmas()
-        assert.notThat(lebennin.puedePasar(gandalf))
+        assert.notThat(lebennin.puedePasarGuerrero(gandalf))
     }    
     test "Gandalf sin armas y con 11 de vida puede atravesar Minas Tirith"{
         gandalf.cantidadDeVida(11)
         gandalf.vaciarArmas()
-        assert.notThat(minasTirith.puedePasar(gandalf))
+        assert.notThat(minasTirith.puedePasarGuerrero(gandalf))
     }     
     test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espadaElfica)
-        assert.that(caminoDeGondor.puedeAtravesar(gandalf))
+        assert.that(caminoDeGondor.puedePasarGuerrero(gandalf))
     }       
     test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espadaElfica)
-        caminoDeGondor.recorrerCamino(gandalf)
+        gandalf.atravesar(caminoDeGondor)
         assert.equals(90, gandalf.cantidadDeVida())
     }       
 }
@@ -68,11 +68,11 @@ describe "zonas y caminos"{
 
 describe "tom"{
   test "Tom puede atravesar Lebennin"{
-    assert.that(lebennin.puedePasar(tom))
+    assert.that(tom.puedeAtravesar(lebennin))
   }
   test "Tom atraviesa el camino que pasa por Gondor antes mencionado"{
     const estadoInicial = tom.vestimenta()
-    caminoDeGondor.recorrerCamino(tom)
+    tom.atravesar(caminoDeGondor)
     const estadoFinal = tom.vestimenta()
     assert.equals(estadoInicial,estadoFinal)
     }

@@ -1,32 +1,36 @@
 import guerreros.*
 
 object lebennin{
-    method puedePasar(guerrero){
-        if (guerrero == tom)
-            return true
-        else
+    method puedePasarGuerrero(guerrero){
             return guerrero.tienePoderSuperiorA1500()    
     }
-    method atravesar(guerrero){}
+
+    method puedePasarPersona(persona) {
+        return persona.puedeAtravesar(self)
+    }
+
+    method dejarPasar(guerrero){
+    }
 
 }
 object minasTirith{
-    method puedePasar(guerrero){
-        if (guerrero == tom)
-            return true
-        else        
-            return guerrero.tieneArmas()
+    method puedePasarPersona(persona) {
+        return persona.puedeAtravesar(self)
     }
-    method atravesar(guerrero){
-        if (guerrero != tom)
-            guerrero.perderVida(10)
+    method puedePasarGuerrero(guerrero){
+        return guerrero.tieneArmas()
+    }
+    method dejarPasar(guerrero){
+        guerrero.perderVida(10)
     }
 }
 object lossarnach{
-    method puedePasar(guerrero)= true
-    method atravesar(guerrero){
-        if(guerrero != tom)
-            guerrero.aumentarVida()
+    method puedePasarGuerrero(guerrero)= true
+    method puedePasarPersona(persona) {
+        return persona.puedeAtravesar(self)
+    }
+    method dejarPasar(guerrero){
+            guerrero.aumentarVida(1)
     }
 }
 
@@ -37,10 +41,10 @@ object caminoDeGondor {
     camino = #{partida , llegada}
   }
 
-  method puedeAtravesar(guerrero) = camino.all({unaZona => unaZona.puedePasar(guerrero)})
+  method puedePasarGuerrero(guerrero) = camino.all({unaZona => unaZona.puedePasarGuerrero(guerrero)})
   
-  method recorrerCamino(guerrero) {
-    if(self.puedeAtravesar(guerrero))
-        camino.forEach({unaZona => unaZona.atravesar(guerrero)})
+  method dejarPasar(guerrero) {
+    if(self.puedePasarGuerrero(guerrero))
+        camino.forEach({unaZona => unaZona.dejarPasar(guerrero)})
   }
 }

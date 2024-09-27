@@ -1,4 +1,6 @@
 import armas.*
+import zonas.*
+
 
 class Guerrero{
     var cantidadDeVida = 0
@@ -32,14 +34,18 @@ class Guerrero{
     method perderVida(unaCantidad){
         cantidadDeVida -= unaCantidad
     }
-    method aumentarVida(){
-        cantidadDeVida +=1
+    method aumentarVida(unaCantidad){
+        cantidadDeVida += unaCantidad
     }
     method tienePoderSuperiorA1500(){
         return self.poder()>1500
     }
     method tieneArmas(){
         return ! armas.isEmpty()
+    }
+
+    method atravesar(unaZona) {
+        unaZona.dejarPasar(self)
     }
 }
 
@@ -50,6 +56,7 @@ const gandalf = new Guerrero(
 
 object tom{
     var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
-    method puedePasar(unaZona) = true
+    method puedeAtravesar(unaZona) = true
+    method atravesar(unaZona) {}
     method vestimenta() = vestimenta
 }

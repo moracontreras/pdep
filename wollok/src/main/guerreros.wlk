@@ -47,6 +47,10 @@ class Guerrero{
     method atravesar(unaZona) {
         unaZona.dejarPasar(self)
     }
+
+    method puedePasar(unaZona) {
+        return unaZona.permitePasar(self)
+    }
 }
 
 const gandalf = new Guerrero(
@@ -56,7 +60,7 @@ const gandalf = new Guerrero(
 
 object tom{
     var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
-    method puedeAtravesar(unaZona) = true
+    method puedePasar(unaZona) = true
     method atravesar(unaZona) {}
     method vestimenta() = vestimenta
 }

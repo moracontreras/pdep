@@ -36,24 +36,24 @@ describe "zonas y caminos"{
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espadaElfica)
-        assert.that(lebennin.puedePasarGuerrero(gandalf))
+        assert.that(gandalf.puedePasar(lebennin))
     }
     test "Gandalf sin armas y con 11 de vida puede atravesar Lebennin"{
         gandalf.cantidadDeVida(11)
         gandalf.vaciarArmas()
-        assert.notThat(lebennin.puedePasarGuerrero(gandalf))
+        assert.notThat(gandalf.puedePasar(lebennin))
     }    
     test "Gandalf sin armas y con 11 de vida puede atravesar Minas Tirith"{
         gandalf.cantidadDeVida(11)
         gandalf.vaciarArmas()
-        assert.notThat(minasTirith.puedePasarGuerrero(gandalf))
+        assert.notThat(gandalf.puedePasar(minasTirith))
     }     
     test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
         gandalf.cantidadDeVida(100)
         gandalf.agregarArma(baculo)
         gandalf.agregarArma(espadaElfica)
-        assert.that(caminoDeGondor.puedePasarGuerrero(gandalf))
+        assert.that(gandalf.puedePasar(caminoDeGondor))
     }       
     test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith"{
         caminoDeGondor.modificarCamino(lebennin, minasTirith)
@@ -68,7 +68,7 @@ describe "zonas y caminos"{
 
 describe "tom"{
   test "Tom puede atravesar Lebennin"{
-    assert.that(tom.puedeAtravesar(lebennin))
+    assert.that(tom.puedePasar(lebennin))
   }
   test "Tom atraviesa el camino que pasa por Gondor antes mencionado"{
     const estadoInicial = tom.vestimenta()

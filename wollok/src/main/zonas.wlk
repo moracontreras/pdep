@@ -1,12 +1,8 @@
 import guerreros.*
 
 object lebennin{
-    method puedePasarGuerrero(guerrero){
+    method permitePasar(guerrero){
             return guerrero.tienePoderSuperiorA1500()    
-    }
-
-    method puedePasarPersona(persona) {
-        return persona.puedeAtravesar(self)
     }
 
     method dejarPasar(guerrero){
@@ -14,10 +10,7 @@ object lebennin{
 
 }
 object minasTirith{
-    method puedePasarPersona(persona) {
-        return persona.puedeAtravesar(self)
-    }
-    method puedePasarGuerrero(guerrero){
+    method permitePasar(guerrero){
         return guerrero.tieneArmas()
     }
     method dejarPasar(guerrero){
@@ -25,10 +18,8 @@ object minasTirith{
     }
 }
 object lossarnach{
-    method puedePasarGuerrero(guerrero)= true
-    method puedePasarPersona(persona) {
-        return persona.puedeAtravesar(self)
-    }
+    method permitePasar(guerrero)= true
+
     method dejarPasar(guerrero){
             guerrero.aumentarVida(1)
     }
@@ -41,10 +32,10 @@ object caminoDeGondor {
     camino = #{partida , llegada}
   }
 
-  method puedePasarGuerrero(guerrero) = camino.all({unaZona => unaZona.puedePasarGuerrero(guerrero)})
+  method permitePasar(guerrero) = camino.all({unaZona => unaZona.permitePasar(guerrero)})
   
   method dejarPasar(guerrero) {
-    if(self.puedePasarGuerrero(guerrero))
+    if(self.permitePasar(guerrero))
         camino.forEach({unaZona => unaZona.dejarPasar(guerrero)})
   }
 }

@@ -1,0 +1,41 @@
+import src.armas.*
+import src.guerreros.*
+import src.zonas.*
+
+describe "armas" {
+  test "Espada con multiplicador 15 y origen Enano tiene un poder de 300" {
+    espadaEnana.multiplicadorDePoder(15)
+    assert.equals(300, espadaEnana.poder())
+  }
+
+  test "Daga con multiplicador 15 y origen Enano tiene un poder de 150" {
+    daga.multiplicadorDePoder(15)
+    daga.poderPorOrigen(20)
+    assert.equals(150, daga.poder())
+  }
+
+  test "Hacha con mango de largo 50 y con hoja de peso 5, tiene un poder de 250" {
+    const hacha = new Hacha(
+      largoDelMango = 50,
+      pesoDeHoja = 5
+    )
+
+    assert.equals(250, hacha.poder())
+  }
+  test "Arco con longitud 110 tiene un poder de 440" {
+    const arco = new Arco(
+      largo = 110
+      )
+
+    assert.equals(440, arco.poder())
+  }
+
+  test "Arco con largo de 110 y tension de 35, tiene un poder de 385" {
+    const arco = new Arco(
+      largo = 110,
+      tension = 35
+      )
+
+    assert.equals(385, arco.poder())
+  }
+}

@@ -38,3 +38,23 @@ describe "armas" {
     assert.equals(385, arco.poder())
   }
 }
+
+describe "Guerreros" {
+  test "Poder de Frodo" {
+    assert.equals(300, frodo.poder())
+  }
+  test "Poder de Gimli"{
+    assert.equals(2175, gimli.poder())
+  }
+  test "Poder de Legolas"{
+    assert.equals(2480, legolas.poder())
+  }
+  test "Poder de Aragorn"{
+    assert.equals(2720, aragorn.poder())
+  }
+  test "Poder de Legolas con medio punto de detreza mas"{
+    legolas.sumarDestreza(0.5)
+    assert.equals(2880, legolas.poder())
+  }
+}
+

@@ -5,6 +5,7 @@ import zonas.*
 class Guerrero{
     var cantidadDeVida = 0
     var armas = []
+    var items = []
     method armas() = armas
     method poderArmas(){
         return armas.sum({unArma=> unArma.poder()})
@@ -15,12 +16,7 @@ class Guerrero{
     method obtenerPoder(unaCantidad){
         return cantidadDeVida*unaCantidad + self.poderArmas()*2
     }
-    method poder(){
-        if(cantidadDeVida<10)
-        return self.obtenerPoder(300)
-        else
-        return self.obtenerPoder(15)
-    }
+    method poder(){}
     method cantidadDeVida()= cantidadDeVida
         method agregarArma(unArma){
         armas.add(unArma)
@@ -37,9 +33,6 @@ class Guerrero{
     method aumentarVida(unaCantidad){
         cantidadDeVida += unaCantidad
     }
-    method tienePoderSuperiorA1500(){
-        return self.poder()>1500
-    }
     method tieneArmas(){
         return ! armas.isEmpty()
     }
@@ -53,10 +46,62 @@ class Guerrero{
     }
 }
 
+//Clases de guerreros
+
+class Hobbit inherits Guerrero {
+  method cantidadDeItems() = items.sum()
+  override method poder() = cantidadDeVida + self.poderArmas() + self.cantidadDeItems()
+  
+}
+class Enano inherits Guerrero {
+    const factorDePoder = 0
+    override method poder() = cantidadDeVida + factorDePoder * self.poderArmas()
+}
+
+class Elfo inherits Guerrero {
+    var destrezaPropia = 0
+    var destrezaBase = 2
+    method sumarDestreza(unValor) {
+        destrezaPropia += unValor
+    }
+    override method poder() = cantidadDeVida + self.poderArmas() * (destrezaPropia + destrezaBase)
+}
+
+class Humano inherits Guerrero {
+    var limitadorDePoder = 0
+    override method poder() = cantidadDeVida * self.poderArmas() / limitadorDePoder
+}
+
+//Guerreros
+const frodo = new Hobbit(
+  cantidadDeVida = 60,
+  armas = [espadaDeFrodo]
+)
+
+const gimli = new Enano (
+    factorDePoder = 3,
+    cantidadDeVida = 75,
+    armas = [hachaDeGimli , hachaDeGimli]
+)
+
+const legolas = new Elfo (
+    cantidadDeVida = 80,
+    destrezaPropia = 1,
+    armas = [arcoDeLegolas , espadaDeLegolas]
+)
+
+const aragorn = new Humano (
+    limitadorDePoder = 20,
+    cantidadDeVida = 85,
+    armas = [espadaAnduril , dagaEnana]
+)
+
+/*
 const gandalf = new Guerrero(
     cantidadDeVida = 100,
     armas = [baculo, espadaElfica]
 )
+*/
 
 object tom{
     var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]

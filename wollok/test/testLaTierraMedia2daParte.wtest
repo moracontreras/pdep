@@ -1,6 +1,6 @@
-import src.armas.*
-import src.guerreros.*
-import src.zonas.*
+import src.main.armas.*
+import src.main.guerreros.*
+import src.main.zonas.*
 
 describe "armas" {
   test "Espada con multiplicador 15 y origen Enano tiene un poder de 300" {
@@ -9,9 +9,8 @@ describe "armas" {
   }
 
   test "Daga con multiplicador 15 y origen Enano tiene un poder de 150" {
-    daga.multiplicadorDePoder(15)
-    daga.poderPorOrigen(20)
-    assert.equals(150, daga.poder())
+    dagaEnana.multiplicadorDePoder(15)
+    assert.equals(150, dagaEnana.poder())
   }
 
   test "Hacha con mango de largo 50 y con hoja de peso 5, tiene un poder de 250" {

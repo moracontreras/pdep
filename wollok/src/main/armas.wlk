@@ -39,7 +39,7 @@ const espadaHumana = new Espada(
   poderPorOrigen = 15
 )
 
-object daga inherits Espada {
+class Daga inherits Espada {
     override method poder() {
         return super() / 2
     }
@@ -70,3 +70,33 @@ class Hacha inherits Arma {
     return largoDelMango * pesoDeHoja
   }
 }
+
+//Armas de los guerreros
+const espadaDeFrodo = new Espada(
+  poderPorOrigen = 30,
+  multiplicadorDePoder = 8
+)
+
+const hachaDeGimli = new Hacha (
+  largoDelMango = 70,
+  pesoDeHoja = 5
+)
+
+const arcoDeLegolas = new Arco (
+  largo = 110
+)
+
+const espadaDeLegolas = new Espada(
+  poderPorOrigen = 30,
+  multiplicadorDePoder = 12
+)
+
+const dagaEnana = new Daga (
+  poderPorOrigen = 20,
+  multiplicadorDePoder = 10
+)
+
+const espadaAnduril = new Espada(
+  poderPorOrigen = 30,
+  multiplicadorDePoder = 18
+)

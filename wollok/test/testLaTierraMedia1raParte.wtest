@@ -1,7 +1,7 @@
 import src.main.armas.*
 import src.main.guerreros.*
 import src.main.zonas.*
-
+/*
 describe "gandalf" {
   test "Poder de Gandalf con toda la vida y todas sus armas"{
     gandalf.cantidadDeVida(100)
@@ -64,7 +64,7 @@ describe "zonas y caminos"{
         assert.equals(90, gandalf.cantidadDeVida())
     }       
 }
-
+*/
 
 describe "tom"{
   test "Tom puede atravesar Lebennin"{

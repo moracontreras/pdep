@@ -27,17 +27,11 @@ class Espada inherits Arma{
   }
 }
 
-const espadaElfica = new Espada(
-  poderPorOrigen = 30
-)
+class EspadaElfica inherits Espada(poderPorOrigen = 30){}
+  
+class EspadaEnana inherits Espada(poderPorOrigen = 20){}
 
-const espadaEnana = new Espada(
-  poderPorOrigen = 20
-)
-
-const espadaHumana = new Espada(
-  poderPorOrigen = 15
-)
+class EspadaHumana inherits Espada(poderPorOrigen = 15){}
 
 class Daga inherits Espada {
     override method poder() {
@@ -72,31 +66,14 @@ class Hacha inherits Arma {
 }
 
 //Armas de los guerreros
-const espadaDeFrodo = new Espada(
-  poderPorOrigen = 30,
-  multiplicadorDePoder = 8
-)
+const espadaDeFrodo = new EspadaElfica(multiplicadorDePoder = 8)
 
-const hachaDeGimli = new Hacha (
-  largoDelMango = 70,
-  pesoDeHoja = 5
-)
+const hachaDeGimli = new Hacha (largoDelMango = 70 , pesoDeHoja = 5)
 
-const arcoDeLegolas = new Arco (
-  largo = 110
-)
+const arcoDeLegolas = new Arco (largo = 110)
 
-const espadaDeLegolas = new Espada(
-  poderPorOrigen = 30,
-  multiplicadorDePoder = 12
-)
+const espadaDeLegolas = new EspadaElfica(multiplicadorDePoder = 12)
 
-const dagaEnana = new Daga (
-  poderPorOrigen = 20,
-  multiplicadorDePoder = 10
-)
+const dagaEnana = new Daga (poderPorOrigen = 20 , multiplicadorDePoder = 10)
 
-const espadaAnduril = new Espada(
-  poderPorOrigen = 30,
-  multiplicadorDePoder = 18
-)
+const espadaAnduril = new EspadaElfica(multiplicadorDePoder = 18)

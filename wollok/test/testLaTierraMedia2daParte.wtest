@@ -4,8 +4,8 @@ import src.main.zonas.*
 
 describe "armas" {
   test "Espada con multiplicador 15 y origen Enano tiene un poder de 300" {
-    espadaEnana.multiplicadorDePoder(15)
-    assert.equals(300, espadaEnana.poder())
+    const espada = new EspadaEnana(multiplicadorDePoder = 15)
+    assert.equals(300, espada.poder())
   }
 
   test "Daga con multiplicador 15 y origen Enano tiene un poder de 150" {

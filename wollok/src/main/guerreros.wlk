@@ -72,9 +72,33 @@ class Humano inherits Guerrero {
     override method poder() = cantidadDeVida * self.poderArmas() / limitadorDePoder
 }
 
+class Maiar inherits Guerrero {
+  const poderBasico = 15
+  const poderBajoAmenaza = 300
+  var factorActual = poderBasico
+
+  method cambiarFactorAPoderBajoAmenaza() {
+    factorActual = poderBajoAmenaza
+  }
+
+  method cambiarFactorAPoderBasico() {
+    factorActual = poderBasico
+  }
+
+  override method poder() {
+    return cantidadDeVida * factorActual + self.poderArmas() * 2
+  }
+}
+
+class Gollum inherits Hobbit {
+  override method poder() {
+    return super.poder() / 2
+  }
+}
+
 //Guerreros
 const frodo = new Hobbit(
-  cantidadDeVida = 60,
+  cantidadDeVida = 50,
   armas = [espadaDeFrodo]
 )
 
@@ -96,12 +120,11 @@ const aragorn = new Humano (
     armas = [espadaAnduril , dagaEnana]
 )
 
-/*
-const gandalf = new Guerrero(
+const gandalf = new Maiar(
     cantidadDeVida = 100,
-    armas = [baculo, espadaElfica]
+    armas = [baculo, glamdring]
 )
-*/
+
 
 object tom{
     var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]

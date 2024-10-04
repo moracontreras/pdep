@@ -77,3 +77,5 @@ const espadaDeLegolas = new EspadaElfica(multiplicadorDePoder = 12)
 const dagaEnana = new Daga (poderPorOrigen = 20 , multiplicadorDePoder = 10)
 
 const espadaAnduril = new EspadaElfica(multiplicadorDePoder = 18)
+
+const glamdring = new EspadaElfica(multiplicadorDePoder = 10)

@@ -52,9 +52,16 @@ describe "Guerreros" {
   test "Poder de Aragorn"{
     assert.equals(2720, aragorn.poder())
   }
+  test "Poder de Gandalf"{
+    assert.equals(2900, gandalf.poder())
+  }
+  test "Gandalf con 10 de vida, y todas sus armas" {
+    gandalf.perderVida(90)
+    gandalf.estaBajoAmenaza()
+    assert.equals(4400, gandalf.poder())
+  }
   test "Poder de Legolas con medio punto de detreza mas"{
     legolas.sumarDestreza(0.5)
     assert.equals(2880, legolas.poder())
   }
 }
-

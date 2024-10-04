@@ -76,13 +76,10 @@ class Maiar inherits Guerrero {
   const poderBasico = 15
   const poderBajoAmenaza = 300
   var factorActual = poderBasico
-
-  method cambiarFactorAPoderBajoAmenaza() {
-    factorActual = poderBajoAmenaza
-  }
-
-  method cambiarFactorAPoderBasico() {
-    factorActual = poderBasico
+  
+  method estaBajoAmenaza() {
+    if(cantidadDeVida > 10) factorActual = poderBasico
+    else factorActual = poderBajoAmenaza
   }
 
   override method poder() {
@@ -98,7 +95,7 @@ class Gollum inherits Hobbit {
 
 //Guerreros
 const frodo = new Hobbit(
-  cantidadDeVida = 50,
+  cantidadDeVida = 60,
   armas = [espadaDeFrodo]
 )
 

@@ -92,7 +92,7 @@ class Maiar inherits Guerrero {
 
 class Gollum inherits Hobbit {
   override method poder() {
-    return super.poder() / 2
+    return self.poder() / 2
   }
 }
 

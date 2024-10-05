@@ -65,3 +65,28 @@ describe "Guerreros" {
     assert.equals(2880, legolas.poder())
   }
 }
+
+describe "Zona"{
+
+    test "Un grupo no puede pasar por una zona por requerimiento de item"{
+        assert.notThat(minasTirith.puedenPasar([gimli, frodo]))
+    }
+
+    test "Un grupo puede pasar una zona"{
+      assert.that(lebennin.puedenPasar([gimli, frodo]))
+    }
+
+    test "Un grupo no puede pasar por una zona por requerimiento de guerrero"{
+      gimli.perderVida(1000) // pierden vida para que no puedan pasar
+      frodo.perderVida(50)
+      assert.notThat(lebennin.puedenPasar([gimli, frodo]))
+    }
+
+    test "Un grupo no puede atravesar un camino"{
+      assert.notThat(caminoDeGondor.puedenPasar([gimli,frodo]))
+    }
+
+    test "Un grupo puede atravesar un camino"{
+      assert.that(caminoPrueba.puedenPasar([legolas,aragorn]))
+    }
+}

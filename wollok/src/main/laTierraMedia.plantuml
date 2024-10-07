@@ -1,0 +1,218 @@
+@startuml latierraMedia
+
+abstract class Arma {
+  poder()
+}
+
+class Baculo{
+  poder 
+  poder()
+}
+
+class Espada {
+    multiplicadorDePoder
+    poderPorOrigen
+
+    multiplicadorDePoder(unPoder) 
+    multiplicadorDePoder()
+    poderPorOrigen()
+    poder()
+}
+
+class EspadaElfica {
+    poderPorOrigen
+}
+  
+class EspadaEnana {
+    poderPorOrigen
+}
+
+class EspadaHumana {
+    poderPorOrigen
+}
+
+class Daga {
+    poder() 
+    poderPorOrigen(unPoder) 
+}
+
+class Arco {
+  tension  
+  largo 
+  
+  largo() 
+  poder() 
+}
+
+class Hacha  {
+  largoDelMango 
+  pesoDeHoja 
+
+  largoDelMango() 
+  pesoDeHoja() 
+  poder()
+}
+
+abstract class Guerrero{
+    cantidadDeVida 
+    armas 
+    items 
+    armas() 
+    poderArmas()
+    cantidadDeVida(unaCantidad)
+    obtenerPoder(unaCantidad)
+    poder()
+    cantidadDeVida()
+    eliminarUnArma(unArma)
+    vaciarArmas()
+    perderVida(unaCantidad)
+    aumentarVida(unaCantidad)
+    tieneArmas()
+    atravesar(unaZona)
+    puedePasar(unaZona)
+}
+
+class Hobbit  {
+  cantidadDeItems() 
+  poder() 
+}
+
+class Enano  {
+    factorDePoder 
+    poder() 
+}
+
+class Elfo  {
+    destrezaPropia 
+    destrezaBase 
+    sumarDestreza(unValor) 
+    poder() 
+}
+
+class Humano  {
+    limitadorDePoder 
+    poder() 
+}
+
+class Maiar {
+  poderBasico
+  poderBajoAmenaza
+  factorActual
+  
+  estaBajoAmenaza() 
+  poder() 
+}
+
+object gollum {
+  poder() 
+}
+
+object tom{
+    vestimenta 
+    puedePasar(unaZona) 
+    atravesar(unaZona) 
+    vestimenta() 
+}
+
+class RequerimientoDeItem{
+    item
+    cantidad
+
+    loCumplen(guerreros)
+    obtenerCantidadItemsTotal(nombreItem, guerreros)
+}
+
+class RequerimientoDeGuerrero{
+    bloque
+
+    cumplenRequerimientoDePoder(guerreros)
+    cumplenRequerimientoDeArmas(guerreros)
+    loCumplen(guerreros)
+}
+
+abstract class Zona {
+    requerimiento 
+
+    puedenPasar(guerreros)
+}
+
+object gondor{
+    zonas 
+}
+
+object lebennin {
+    permitePasar(guerrero)
+    dejarPasar(guerrero)
+}
+
+object minasTirith {
+    permitePasar(guerrero)
+    dejarPasar(guerrero)
+}
+
+object belfalas {
+    puedenPasar(guerreros) 
+}
+
+object rohan{
+    zonas 
+}
+
+object fangorn {
+    requerimiento 
+}
+
+
+object edoras {
+    puedenPasar(guerreros) 
+}
+
+object estemnet {
+    requerimiento 
+}
+
+object lossarnach {
+    permitePasar(guerrero)
+    dejarPasar(guerrero)
+}
+
+class Camino{
+    camino 
+    permitePasar(guerrero) 
+    dejarPasar(guerrero) 
+    puedenPasar(guerreros)
+}
+
+Interface AtravesarZona {
+    puedePasar(unaZona) 
+    atravesar(unaZona) 
+}
+
+Baculo --|> Arma
+Espada --|> Arma
+EspadaElfica --|> Espada
+EspadaEnana --|> Espada
+EspadaHumana --|> Espada
+Daga --|> Espada
+Arco --|> Arma
+Hacha --|> Arma
+
+Hobbit --|> Guerrero
+Enano --|> Guerrero
+Elfo --|> Guerrero
+Humano --|> Guerrero
+Maiar --|> Guerrero
+gollum --|> Hobbit
+
+
+lebennin --|> Zona
+minasTirith --|> Zona
+belfalas --|> Zona
+fangorn --|> Zona
+edoras --|> Zona
+estemnet --|> Zona
+
+tom .|> AtravesarZona
+Guerrero .|> AtravesarZona
+
+@enduml

@@ -1,6 +1,6 @@
 @startuml latierraMedia
 
-abstract class Arma {
+Interface Arma {
   poder()
 }
 
@@ -109,6 +109,7 @@ object gollum {
 
 object tom{
     vestimenta 
+    poder()
     puedePasar(unaZona) 
     atravesar(unaZona) 
     vestimenta() 
@@ -123,64 +124,24 @@ class RequerimientoDeItem{
 }
 
 class RequerimientoDeGuerrero{
-    bloque
+    condicion
 
     cumplenRequerimientoDePoder(guerreros)
     cumplenRequerimientoDeArmas(guerreros)
     loCumplen(guerreros)
 }
 
-abstract class Zona {
+class Zona {
     requerimiento 
 
     puedenPasar(guerreros)
 }
 
-object gondor{
-    zonas 
-}
-
-object lebennin {
-    permitePasar(guerrero)
-    dejarPasar(guerrero)
-}
-
-object minasTirith {
-    permitePasar(guerrero)
-    dejarPasar(guerrero)
-}
-
-object belfalas {
-    puedenPasar(guerreros) 
-}
-
-object rohan{
-    zonas 
-}
-
-object fangorn {
-    requerimiento 
-}
-
-
-object edoras {
-    puedenPasar(guerreros) 
-}
-
-object estemnet {
-    requerimiento 
-}
-
-object lossarnach {
-    permitePasar(guerrero)
-    dejarPasar(guerrero)
-}
 
 class Camino{
     camino 
-    permitePasar(guerrero) 
-    dejarPasar(guerrero) 
-    puedenPasar(guerreros)
+ 
+    dejarPasar(guerreros)
 }
 
 Interface AtravesarZona {
@@ -188,14 +149,19 @@ Interface AtravesarZona {
     atravesar(unaZona) 
 }
 
-Baculo --|> Arma
-Espada --|> Arma
+
+Interface Requerimiento {
+    loCumplen(guerrero)
+}
+
+Baculo .|> Arma
+Espada .|> Arma
 EspadaElfica --|> Espada
 EspadaEnana --|> Espada
 EspadaHumana --|> Espada
 Daga --|> Espada
-Arco --|> Arma
-Hacha --|> Arma
+Arco .|> Arma
+Hacha .|> Arma
 
 Hobbit --|> Guerrero
 Enano --|> Guerrero
@@ -204,15 +170,16 @@ Humano --|> Guerrero
 Maiar --|> Guerrero
 gollum --|> Hobbit
 
-
-lebennin --|> Zona
-minasTirith --|> Zona
-belfalas --|> Zona
-fangorn --|> Zona
-edoras --|> Zona
-estemnet --|> Zona
-
 tom .|> AtravesarZona
 Guerrero .|> AtravesarZona
+
+RequerimientoDeGuerrero .|> Requerimiento
+RequerimientoDeItem .|> Requerimiento
+Requerimiento --> Zona
+Zona --> Camino
+Arma --> Guerrero
+
+Camino .> Guerrero
+
 
 @enduml

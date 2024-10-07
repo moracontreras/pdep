@@ -95,7 +95,7 @@ object gollum inherits Hobbit {
 
 //Guerreros
 const frodo = new Hobbit(
-  cantidadDeVida = 60,
+  cantidadDeVida = 50,
   armas = [espadaDeFrodo]
 )
 

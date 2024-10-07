@@ -19,14 +19,6 @@ const requerimientoCapas = new RequerimientoDeItem(item = "capa elfica", cantida
 class RequerimientoDeGuerrero{
     var condicion
 
-    method cumplenRequerimientoDePoder(guerreros){
-        return guerreros.any({guerrero => guerrero.tienePoderSuperiorA1500()})
-    }
-
-    method cumplenRequerimientoDeArmas(guerreros){
-        return guerreros.any({guerrero => guerrero.tieneArmas()})
-    }
-
     method loCumplen(guerreros){
         return guerreros.any(condicion)
     }

@@ -41,7 +41,7 @@ describe "armas" {
 
 describe "Guerreros" {
   test "Poder de Frodo" {
-    assert.equals(300, frodo.poder())
+    assert.equals(290, frodo.poder())
   }
   test "Poder de Gimli"{
     assert.equals(2175, gimli.poder())

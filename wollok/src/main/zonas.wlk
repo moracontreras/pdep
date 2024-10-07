@@ -17,7 +17,7 @@ const requerimientoLembas = new RequerimientoDeItem(item = "lemba", cantidad = 1
 const requerimientoCapas = new RequerimientoDeItem(item = "capa elfica", cantidad = 3)
 
 class RequerimientoDeGuerrero{
-    var bloque
+    var condicion
 
     method cumplenRequerimientoDePoder(guerreros){
         return guerreros.any({guerrero => guerrero.tienePoderSuperiorA1500()})
@@ -28,12 +28,12 @@ class RequerimientoDeGuerrero{
     }
 
     method loCumplen(guerreros){
-        return guerreros.any(bloque)
+        return guerreros.any(condicion)
     }
 }
 
-const requerimientoDePoder = new RequerimientoDeGuerrero(bloque = {guerrero => guerrero.tienePoderSuperiorA1500()})
-const requerimientoDeArmas = new RequerimientoDeGuerrero(bloque = {guerrero => guerrero.tieneArmas()})
+const requerimientoDePoder = new RequerimientoDeGuerrero(condicion = {guerrero => guerrero.tienePoderSuperiorA1500()})
+const requerimientoDeArmas = new RequerimientoDeGuerrero(condicion = {guerrero => guerrero.tieneArmas()})
 
 class Zona {
     var requerimiento = 0
@@ -105,15 +105,8 @@ object lossarnach {
 class Camino{
     var camino = #{}
 
-    method permitePasar(guerrero) = camino.all({unaZona => unaZona.permitePasar(guerrero)})
-  
-    method dejarPasar(guerrero) {
-        if(self.permitePasar(guerrero))
-            camino.forEach({unaZona => unaZona.dejarPasar(guerrero)})
-    }
-
-    method puedenPasar(guerreros){
-        return camino.all({unaZona => unaZona.puedenPasar(guerreros)})
+    method dejarPasar(guerreros) = camino.all{
+        zona => zona.puedenPasar(guerreros)
     }
 }
 

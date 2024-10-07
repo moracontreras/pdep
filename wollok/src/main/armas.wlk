@@ -1,18 +1,14 @@
 import guerreros.*
 
-class Arma {
-  method poder()
-}
 
-
-class Baculo inherits Arma {
+class Baculo {
   const poder = 0
-  override method poder() = poder 
+  method poder() = poder 
 }
 
 const baculo = new Baculo (poder = 400)
 
-class Espada inherits Arma{
+class Espada {
   var multiplicadorDePoder = 0
     method multiplicadorDePoder(unPoder) {
         multiplicadorDePoder = (unPoder.max(1)).min(20)
@@ -22,7 +18,7 @@ class Espada inherits Arma{
     var poderPorOrigen = 0
   method poderPorOrigen() = poderPorOrigen
 
-  override method poder(){
+  method poder(){
     return multiplicadorDePoder * poderPorOrigen
   }
 }
@@ -43,24 +39,24 @@ class Daga inherits Espada {
     }
 }
 
-class Arco inherits Arma {
+class Arco  {
   var property tension = 40 
   var largo = 0
 
   method largo() = largo
 
-  override method poder() {
+  method poder() {
     return (tension * largo) / 10
   }
 }
 
-class Hacha inherits Arma {
+class Hacha {
   var largoDelMango = 0
   var pesoDeHoja = 0
   method largoDelMango() = largoDelMango
   method pesoDeHoja() = pesoDeHoja
 
-  override method poder() {
+  method poder() {
     return largoDelMango * pesoDeHoja
   }
 }

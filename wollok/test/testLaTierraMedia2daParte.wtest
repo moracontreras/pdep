@@ -83,10 +83,10 @@ describe "Zona"{
     }
 
     test "Un grupo no puede atravesar un camino"{
-      assert.notThat(caminoDeGondor.puedenPasar([gimli,frodo]))
+      assert.notThat(caminoDeGondor.dejarPasar([gimli,frodo]))
     }
 
     test "Un grupo puede atravesar un camino"{
-      assert.that(caminoPrueba.puedenPasar([legolas,aragorn]))
+      assert.that(caminoPrueba.dejarPasar([legolas,aragorn]))
     }
 }

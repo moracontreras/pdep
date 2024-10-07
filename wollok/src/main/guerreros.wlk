@@ -87,9 +87,9 @@ class Maiar inherits Guerrero {
   }
 }
 
-class Gollum inherits Hobbit {
+object gollum inherits Hobbit {
   override method poder() {
-    return self.poder() / 2
+    return super() / 2
   }
 }
 
@@ -125,6 +125,7 @@ const gandalf = new Maiar(
 
 object tom{
     var vestimenta = ["Chaqueta azul", "Botas amarillas", "Sombrero"]
+    method poder() = 10000000
     method puedePasar(unaZona) = true
     method atravesar(unaZona) {}
     method vestimenta() = vestimenta
